@@ -13,7 +13,11 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
   const repeated = tickerText.repeat(3);
 
   return (
-    <section id="services" className="bg-bg-light overflow-hidden" style={{ paddingTop: "112px", paddingBottom: "80px" }}>
+    <section
+      id="services"
+      className="bg-bg-light overflow-hidden flex flex-col"
+      style={{ minHeight: "100dvh", paddingTop: "112px", paddingBottom: "80px" }}
+    >
       {/* Header + tabs */}
       <div className="px-6 md:px-14">
         <div className="flex flex-col gap-2 mb-6">
@@ -45,22 +49,28 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
         </div>
       </div>
 
-      {/* Huge orange scrolling text + floating card */}
-      <div className="relative overflow-hidden" style={{ height: "clamp(120px, 16vw, 200px)" }}>
+      {/* Huge orange scrolling text + floating card. minHeight matches the
+          card's own size clamp (plus breathing room) so this region never
+          gets squeezed shorter than the card — that squeeze was clipping the
+          card's top/bottom against overflow-hidden. The section's 100dvh is
+          a floor, not a ceiling: on tighter viewports it grows taller rather
+          than crushing the card. */}
+      <div className="relative overflow-hidden flex-1" style={{ minHeight: "clamp(220px, 26vw, 420px)" }}>
         {/* Scrolling orange text */}
         <div
           className="absolute inset-0 flex items-center whitespace-nowrap w-max font-display text-orange"
-          style={{ fontSize: "clamp(60px, 10vw, 120px)", lineHeight: 1, animation: "svc-ticker 16s linear infinite" }}
+          style={{ fontSize: "clamp(60px, 10vw, 120px)", lineHeight: 1, animation: "svc-ticker 70s linear infinite" }}
         >
           <span>{repeated}</span>
         </div>
 
-        {/* Floating product card with real image */}
+        {/* Floating product card with real image — 1640×1000 native (1.64:1),
+            matched here so nothing gets cropped */}
         <div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-          style={{ width: "clamp(180px, 20vw, 280px)", height: "clamp(100px, 12vw, 160px)", borderRadius: "16px", zIndex: 2 }}
+          style={{ width: "clamp(320px, 40vw, 640px)", aspectRatio: "1640 / 1000", borderRadius: "clamp(16px, 2vw, 24px)", zIndex: 2 }}
         >
-          <Image key={tab.id} src={images.servicesBrand} alt={tab.label} fill sizes="280px" className="object-cover transition-opacity duration-300 animate-key-fade" />
+          <Image key={tab.id} src={images.servicesByTab[tab.id]} alt={tab.label} fill sizes="(min-width: 1024px) 640px, 40vw" className="object-cover transition-opacity duration-300 animate-key-fade" />
         </div>
       </div>
 

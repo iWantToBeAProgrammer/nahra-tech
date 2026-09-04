@@ -39,8 +39,13 @@ export const images = {
   workVidiolabPhotoTablet:   "/images/projects/tab-work-vidiolab.webp",
   workVidiolabPhotoMobile:   "/images/projects/mobile-work-vidiolab.webp",
 
-  // Services — brand design card image
-  servicesBrand: `${BASE}/image-1787421012773.webp`,
+  // Services — one card image per tab (id matches services.tabs[].id in the dictionaries)
+  servicesByTab: {
+    software: "/images/services/custom-platforms-software.webp",
+    ai: "/images/services/ai-systems-engineering.webp",
+    systems: "/images/services/systems-integrations.webp",
+    partnership: "/images/services/ongoing-engineering.webp",
+  } as Record<string, string>,
 
   // Team section
   founderPhoto: `${BASE}/image-1787421013352.webp`,
