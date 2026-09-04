@@ -33,10 +33,10 @@ function TypewriterChars({
             style={{
               display: "inline-block",
               whiteSpace: char === " " ? "pre" : "normal",
-              filter: isRevealed ? "blur(0px)" : "blur(8px)",
+              filter: isRevealed ? "blur(0px)" : "blur(4px)",
               opacity: isRevealed ? 1 : 0,
-              transform: isRevealed ? "translateY(0)" : "translateY(6px)",
-              transition: "filter 180ms ease-out, opacity 180ms ease-out, transform 180ms ease-out",
+              transform: isRevealed ? "translateY(0)" : "translateY(3px)",
+              transition: "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
               willChange: "filter, opacity, transform",
             }}
           >
@@ -80,7 +80,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
   useEffect(() => {
     let rafId = 0;
     let start: number | null = null;
-    const durationMs = Math.ceil(totalSlots / 2) * 18;
+    const durationMs = Math.ceil(totalSlots / 2) * 10;
 
     const tick = (ts: number) => {
       if (start === null) start = ts;
@@ -90,13 +90,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
       if (next < totalSlots) rafId = requestAnimationFrame(tick);
     };
 
-    const timeout = setTimeout(() => {
-      setIsLoaded(true);
-      rafId = requestAnimationFrame(tick);
-    }, 80);
+    setIsLoaded(true);
+    rafId = requestAnimationFrame(tick);
 
     return () => {
-      clearTimeout(timeout);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, [totalSlots]);
@@ -119,10 +116,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                   loading={i === 0 ? "eager" : "lazy"}
                   className="w-8 h-8 rounded-full object-cover border-2 border-smoky-white"
                   style={{
-                    transform: isLoaded ? "scale(1) rotate(0deg)" : "scale(0) rotate(-12deg)",
+                    transform: isLoaded ? "scale(1) rotate(0deg)" : "scale(0.9) rotate(-6deg)",
                     opacity: isLoaded ? 1 : 0,
-                    transition: "transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease",
-                    transitionDelay: `${i * 60}ms`,
+                    transition: "transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 220ms ease",
+                    transitionDelay: `${i * 40}ms`,
                     willChange: "transform, opacity",
                   }}
                 />
@@ -132,9 +129,9 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               className="text-dark-gray text-[14px] font-body"
               style={{
                 opacity: isLoaded ? 1 : 0,
-                transform: isLoaded ? "translateX(0)" : "translateX(-6px)",
-                transition: "opacity 450ms ease, transform 450ms cubic-bezier(0.16, 1, 0.3, 1)",
-                transitionDelay: "180ms",
+                transform: isLoaded ? "translateX(0)" : "translateX(-4px)",
+                transition: "opacity 280ms ease, transform 280ms cubic-bezier(0.16, 1, 0.3, 1)",
+                transitionDelay: "100ms",
               }}
             >
               {hero.badge}
@@ -219,11 +216,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               fontSize: "16px",
               lineHeight: "24px",
               letterSpacing: "-0.16px",
-              filter: isLoaded ? "blur(0px)" : "blur(6px)",
+              filter: isLoaded ? "blur(0px)" : "blur(4px)",
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? "translateY(0)" : "translateY(18px)",
-              transition: "filter 650ms cubic-bezier(0.16,1,0.3,1), opacity 650ms cubic-bezier(0.16,1,0.3,1), transform 650ms cubic-bezier(0.16,1,0.3,1)",
-              transitionDelay: "280ms",
+              transform: isLoaded ? "translateY(0)" : "translateY(10px)",
+              transition: "filter 350ms cubic-bezier(0.16,1,0.3,1), opacity 350ms cubic-bezier(0.16,1,0.3,1), transform 350ms cubic-bezier(0.16,1,0.3,1)",
+              transitionDelay: "150ms",
               willChange: "filter, opacity, transform",
             }}
           >
@@ -238,11 +235,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               background: "rgba(12,12,12,0.82)",
               padding: "12px 24px",
               borderRadius: "50px",
-              filter: isLoaded ? "blur(0px)" : "blur(6px)",
+              filter: isLoaded ? "blur(0px)" : "blur(4px)",
               opacity: isLoaded ? 1 : 0,
-              transform: isLoaded ? "translateY(0)" : "translateY(18px)",
-              transition: "filter 650ms cubic-bezier(0.16,1,0.3,1), opacity 650ms cubic-bezier(0.16,1,0.3,1), transform 650ms cubic-bezier(0.16,1,0.3,1)",
-              transitionDelay: "350ms",
+              transform: isLoaded ? "translateY(0)" : "translateY(10px)",
+              transition: "filter 350ms cubic-bezier(0.16,1,0.3,1), opacity 350ms cubic-bezier(0.16,1,0.3,1), transform 350ms cubic-bezier(0.16,1,0.3,1)",
+              transitionDelay: "190ms",
               willChange: "filter, opacity, transform",
             }}
           >
@@ -260,10 +257,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               minHeight: "420px",
               transform: isLoaded
                 ? "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)"
-                : "perspective(1200px) rotateX(14deg) rotateY(0deg) translateY(36px) scale(0.96)",
+                : "perspective(1200px) rotateX(8deg) rotateY(0deg) translateY(16px) scale(0.98)",
               opacity: isLoaded ? 1 : 0,
-              transition: "transform 700ms cubic-bezier(0.16,1,0.3,1), opacity 700ms cubic-bezier(0.16,1,0.3,1)",
-              transitionDelay: "200ms",
+              transition: "transform 400ms cubic-bezier(0.16,1,0.3,1), opacity 400ms cubic-bezier(0.16,1,0.3,1)",
+              transitionDelay: "100ms",
               willChange: "transform, opacity",
             }}
           >
