@@ -112,6 +112,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
 
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const scrimRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const titleRefs = useRef<(HTMLHeadingElement | null)[]>([]);
   const [stackEnabled, setStackEnabled] = useState(false);
 
   useEffect(() => {
@@ -120,10 +121,45 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
 
     let ticking = false;
 
+    // The title sits near the *bottom* of a ~90dvh card, so it only crosses
+    // into the viewport during the last stretch of the card's arrival — by
+    // the time the card's own top reaches its pinned position, the title has
+    // long since finished "arriving" by that measure, often while still
+    // below the fold. So this reads the title's own position and gives it
+    // its own distance: (viewport height) to (where it ends up once its card
+    // is pinned), computed from the title's fixed offset within the card.
+    // Once pinned, the whole card — title included — stops moving, so this
+    // has to land on exactly 1 by then; recomputing the offset every frame
+    // (cheap, 5 cards) keeps it correct across resizes/breakpoints.
+    const applyArrival = (i: number, cardTop: number, viewportH: number) => {
+      const title = titleRefs.current[i];
+      if (!title) return;
+      const titleTop = title.getBoundingClientRect().top;
+      const offsetFromCardTop = titleTop - cardTop;
+      const distance = Math.max(1, viewportH - STICKY_TOP_PX - offsetFromCardTop);
+      const raw = (viewportH - titleTop) / distance;
+      // Linear, not eased — this is a scrubber (scroll position → reveal
+      // count), and easeOutCubic saturates so fast that most characters were
+      // popping in almost as soon as the title crossed into view at all.
+      const progress = Math.min(1, Math.max(0, raw));
+      const chars = title.children;
+      const revealCount = Math.round(progress * chars.length);
+      for (let c = 0; c < chars.length; c++) {
+        const span = chars[c] as HTMLElement;
+        const revealed = c < revealCount;
+        span.style.filter = revealed ? "blur(0px)" : "blur(4px)";
+        span.style.opacity = revealed ? "1" : "0";
+        span.style.transform = revealed ? "translateY(0)" : "translateY(3px)";
+      }
+    };
+
     const update = () => {
       ticking = false;
       const viewportH = window.innerHeight;
       const distance = viewportH - STICKY_TOP_PX;
+
+      const first = cardRefs.current[0];
+      if (first) applyArrival(0, first.getBoundingClientRect().top, viewportH);
 
       for (let i = 0; i < total - 1; i++) {
         const card = cardRefs.current[i];
@@ -137,6 +173,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
 
         card.style.transform = `scale(${(1 - progress * 0.08).toFixed(3)}) translateY(${(-progress * 16).toFixed(1)}px)`;
         if (scrim) scrim.style.opacity = (progress * 0.55).toFixed(2);
+        applyArrival(i + 1, nextTop, viewportH);
       }
     };
 
@@ -272,19 +309,39 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
                   </p>
                 </div>
 
-                {/* Project title — bottom-left */}
+                {/* Project title — bottom-left. Typewriter reveal driven by the
+                    same scroll progress that pins/covers the cards above (see
+                    applyArrival in the scroll effect) — not a generic
+                    scroll-into-view or fixed timer, so letters land exactly as
+                    the card arrives. Same per-character recipe as the hero
+                    headline (TypewriterChars in HeroSection.tsx). */}
                 <div
                   className="absolute bottom-6 left-6 md:bottom-8 md:left-8"
                   style={{ zIndex: 2 }}
                 >
                   <h3
+                    ref={(el) => {
+                      titleRefs.current[i] = el;
+                    }}
                     className="font-display leading-none"
                     style={{
                       fontSize: "clamp(32px, 6vw, 64px)",
                       color: cs.text,
                     }}
                   >
-                    {work.title}
+                    {work.title.split("").map((char, idx) => (
+                      <span
+                        key={idx}
+                        style={{
+                          display: "inline-block",
+                          whiteSpace: char === " " ? "pre" : "normal",
+                          transition: "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
+                          willChange: stackEnabled ? "filter, opacity, transform" : undefined,
+                        }}
+                      >
+                        {char}
+                      </span>
+                    ))}
                   </h3>
                 </div>
 
