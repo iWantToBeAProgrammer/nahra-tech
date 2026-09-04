@@ -7,21 +7,26 @@ type ViewBox = { w: number; h: number };
 // Screen-hole coordinates read directly from each SVG's own viewBox —
 // the bezel path is a donut (outer frame minus this rect), so the
 // screenshot only needs to be sized/positioned to it, no clip-path needed.
+// Coordinates are the *true* screen-hole bounding box, derived from each
+// SVG's own donut cutout path (not the decorative inner-shadow <rect>, which
+// is inset from the real hole by roughly the corner radius on some edges —
+// using it left a visible gap between the screen content and the camera
+// cutout, worst on phone where the corner radius is largest).
 const DEVICE_SPECS: Record<DeviceKind, { frame: string; viewBox: ViewBox; screen: Rect }> = {
   laptop: {
     frame: "/images/mockup/laptop-bezel-v3.svg",
     viewBox: { w: 1700, h: 1120 },
-    screen: { x: 82, y: 62, w: 1530, h: 864, rx: 6 },
+    screen: { x: 82, y: 56, w: 1536, h: 876, rx: 6 },
   },
   tablet: {
     frame: "/images/mockup/tablet-bezel-v3.svg",
     viewBox: { w: 1240, h: 1660 },
-    screen: { x: 75, y: 53, w: 1090, h: 1538, rx: 14 },
+    screen: { x: 75, y: 39, w: 1090, h: 1566, rx: 14 },
   },
   phone: {
     frame: "/images/mockup/phone-bezel-v3.svg",
     viewBox: { w: 780, h: 1600 },
-    screen: { x: 28, y: 107, w: 724, h: 1448, rx: 80 },
+    screen: { x: 28, y: 45, w: 724, h: 1510, rx: 80 },
   },
 };
 
@@ -83,7 +88,7 @@ export default function DeviceMockup({
           overflow: "hidden",
         }}
       >
-        <Image src={screenshot} alt="" fill sizes={sizes} className="object-cover object-top" />
+        <Image src={screenshot} alt="" fill sizes={sizes} className="object-cover object-top-left" />
       </div>
 
       {/* bezel art — rotated as a whole so its outline matches the swapped footprint */}

@@ -33,6 +33,12 @@ export const images = {
   workVidiolabPhoto:   "/images/projects/work-vidiolab.webp",
   workCrmPhoto:        "/images/projects/work-crm.webp",
 
+  // Works — tablet/mobile screenshots (only captured for some projects so far)
+  workJomterbangPhotoTablet: "/images/projects/tab-work-jomterbang.webp",
+  workJomterbangPhotoMobile: "/images/projects/mobile-work-jomterbang.webp",
+  workVidiolabPhotoTablet:   "/images/projects/tab-work-vidiolab.webp",
+  workVidiolabPhotoMobile:   "/images/projects/mobile-work-vidiolab.webp",
+
   // Services — brand design card image
   servicesBrand: `${BASE}/image-1787421012773.webp`,
 

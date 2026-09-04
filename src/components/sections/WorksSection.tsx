@@ -14,8 +14,16 @@ type ProjectPhoto = { desktop: string; tablet?: string; mobile?: string };
 const projectPhotos: ProjectPhoto[] = [
   { desktop: images.workBsj7Photo },
   { desktop: images.workBarcodePhoto },
-  { desktop: images.workJomterbangPhoto },
-  { desktop: images.workVidiolabPhoto },
+  {
+    desktop: images.workJomterbangPhoto,
+    tablet: images.workJomterbangPhotoTablet,
+    mobile: images.workJomterbangPhotoMobile,
+  },
+  {
+    desktop: images.workVidiolabPhoto,
+    tablet: images.workVidiolabPhotoTablet,
+    mobile: images.workVidiolabPhotoMobile,
+  },
   { desktop: images.workCrmPhoto },
 ];
 
@@ -51,13 +59,13 @@ function ProjectDeviceMockup({ photo, alt }: { photo: ProjectPhoto; alt: string 
     >
       <div
         className="relative aspect-[4/3] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015]"
-        style={{ width: "min(880px, 100cqw, 133cqh)" }}
+        style={{ width: "min(1400px, 100cqw, 133cqh)" }}
       >
         <DeviceMockup
           device="laptop"
           screenshot={photo.desktop}
           alt={`${alt} — laptop`}
-          sizes="(min-width: 1024px) 480px, 63vw"
+          sizes="(min-width: 1024px) 880px, 63vw"
           className="left-[7%] top-[24%] w-[63%]"
           style={{ position: "absolute", zIndex: 1 }}
         />
@@ -66,7 +74,7 @@ function ProjectDeviceMockup({ photo, alt }: { photo: ProjectPhoto; alt: string 
             device="tablet"
             screenshot={photo.tablet!}
             alt={`${alt} — tablet`}
-            sizes="(min-width: 1024px) 175px, 23vw"
+            sizes="(min-width: 1024px) 320px, 23vw"
             className="left-[63%] top-[35%] w-[23%]"
             style={{ position: "absolute", zIndex: 2 }}
           />
@@ -76,7 +84,7 @@ function ProjectDeviceMockup({ photo, alt }: { photo: ProjectPhoto; alt: string 
             device="phone"
             screenshot={photo.mobile!}
             alt={`${alt} — phone`}
-            sizes="(min-width: 1024px) 85px, 11vw"
+            sizes="(min-width: 1024px) 155px, 11vw"
             className="left-[55%] top-[50%] w-[11%]"
             style={{ position: "absolute", zIndex: 3 }}
           />
