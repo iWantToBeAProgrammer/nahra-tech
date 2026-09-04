@@ -4,14 +4,87 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import type { Dictionary } from "@/data/dictionaries";
 import { images } from "@/data/images";
+import DeviceMockup from "@/components/ui/DeviceMockup";
 
-const projectPhotos = [
-  images.workBsj7Photo,
-  images.workBarcodePhoto,
-  images.workJomterbangPhoto,
-  images.workVidiolabPhoto,
-  images.workCrmPhoto,
+// Per-project screenshots. `tablet`/`mobile` are optional — most projects only
+// have a desktop capture right now. Add them here as they become available;
+// ProjectDeviceMockup below picks the layout based on what's actually present.
+type ProjectPhoto = { desktop: string; tablet?: string; mobile?: string };
+
+const projectPhotos: ProjectPhoto[] = [
+  { desktop: images.workBsj7Photo },
+  { desktop: images.workBarcodePhoto },
+  { desktop: images.workJomterbangPhoto },
+  { desktop: images.workVidiolabPhoto },
+  { desktop: images.workCrmPhoto },
 ];
+
+function ProjectDeviceMockup({ photo, alt }: { photo: ProjectPhoto; alt: string }) {
+  const hasTablet = Boolean(photo.tablet);
+  const hasMobile = Boolean(photo.mobile);
+
+  // Desktop-only (the common case today): one large centered laptop instead
+  // of stretching the same screenshot into phone/tablet frames it was never
+  // captured for.
+  if (!hasTablet && !hasMobile) {
+    return (
+      <div
+        className="absolute inset-0 flex items-center justify-center p-6 md:p-12"
+        style={{ zIndex: 1, containerType: "size" }}
+      >
+        <DeviceMockup
+          device="laptop"
+          screenshot={photo.desktop}
+          alt={`${alt} — laptop`}
+          sizes="(min-width: 1024px) 680px, 88vw"
+          className="transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015]"
+          style={{ width: "min(880px, 88cqw, 135cqh)" }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="absolute inset-0 flex items-center justify-center p-6 md:p-12"
+      style={{ zIndex: 1, containerType: "size" }}
+    >
+      <div
+        className="relative aspect-[4/3] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015]"
+        style={{ width: "min(880px, 100cqw, 133cqh)" }}
+      >
+        <DeviceMockup
+          device="laptop"
+          screenshot={photo.desktop}
+          alt={`${alt} — laptop`}
+          sizes="(min-width: 1024px) 480px, 63vw"
+          className="left-[7%] top-[24%] w-[63%]"
+          style={{ position: "absolute", zIndex: 1 }}
+        />
+        {hasTablet && (
+          <DeviceMockup
+            device="tablet"
+            screenshot={photo.tablet!}
+            alt={`${alt} — tablet`}
+            sizes="(min-width: 1024px) 175px, 23vw"
+            className="left-[63%] top-[35%] w-[23%]"
+            style={{ position: "absolute", zIndex: 2 }}
+          />
+        )}
+        {hasMobile && (
+          <DeviceMockup
+            device="phone"
+            screenshot={photo.mobile!}
+            alt={`${alt} — phone`}
+            sizes="(min-width: 1024px) 85px, 11vw"
+            className="left-[55%] top-[50%] w-[11%]"
+            style={{ position: "absolute", zIndex: 3 }}
+          />
+        )}
+      </div>
+    </div>
+  );
+}
 
 const cardStyles = [
   { bg: "rgb(15,15,15)", text: "white" },
@@ -146,7 +219,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
               >
                 {/* Background image preview with dark overlay */}
                 <Image
-                  src={photo}
+                  src={photo.desktop}
                   alt={work.title}
                   fill
                   sizes="100vw"
@@ -168,21 +241,9 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
                   />
                 )}
 
-                {/* Main Product screenshot — centered frame */}
-                <div
-                  className="absolute inset-0 flex items-center justify-center p-6 md:p-12"
-                  style={{ zIndex: 1 }}
-                >
-                  <div className="relative w-full max-w-[760px] aspect-video max-h-[70%] rounded-xl overflow-hidden border border-white/15 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.015] group-hover:shadow-2xl">
-                    <Image
-                      src={photo}
-                      alt={work.title}
-                      fill
-                      sizes="(min-width: 1024px) 760px, 100vw"
-                      className="object-cover object-top"
-                    />
-                  </div>
-                </div>
+                {/* Device mockup — laptop always shown; tablet/phone only appear once
+                    that project actually has those screenshots (see projectPhotos above) */}
+                <ProjectDeviceMockup photo={photo} alt={work.title} />
 
                 {/* Counter + description — top-left */}
                 <div
