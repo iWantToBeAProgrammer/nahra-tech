@@ -1,26 +1,263 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   DESIGN SYSTEM — Nahra Web Development Studio
+   Source: Framer project 5hnQXhmOV9m7mzobmT0D
+   ============================================================ */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* --- Fonts --- */
+  --font-display: "Cal Sans", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-handwriting: "Caveat", cursive;
+
+  /* --- Colors: Solids --- */
+  --color-black:        rgb(0, 0, 0);
+  --color-ink-black:    rgb(19, 19, 19);
+  --color-dark-gray:    rgb(92, 92, 92);
+  --color-smoky-white:  rgb(240, 240, 240);
+  --color-white:        rgb(255, 255, 255);
+  --color-bg-light:     rgb(220, 220, 220);
+  --color-bg-dark:      rgb(17, 17, 17);
+  --color-orange:       rgb(255, 77, 0);
+  --color-green:        rgb(97, 197, 84);
+
+  /* --- Colors: Alpha --- */
+  --color-smoky-black-82: rgba(12, 12, 12, 0.82);
+  --color-smoky-black-40: rgba(12, 12, 12, 0.40);
+  --color-black-77:       rgba(0, 0, 0, 0.77);
+  --color-black-19:       rgba(0, 0, 0, 0.19);
+  --color-black-17:       rgba(0, 0, 0, 0.17);
+  --color-black-10:       rgba(0, 0, 0, 0.10);
+  --color-black-3:        rgba(0, 0, 0, 0.03);
+  --color-ink-black-8:    rgba(19, 19, 19, 0.08);
+  --color-nero-12:        rgba(26, 26, 26, 0.12);
+  --color-nero-8:         rgba(26, 26, 26, 0.08);
+  --color-nero-6:         rgba(26, 26, 26, 0.06);
+  --color-dark-gray-40:   rgba(92, 92, 92, 0.40);
+  --color-white-80:       rgba(255, 255, 255, 0.80);
+  --color-white-64:       rgba(255, 255, 255, 0.64);
+  --color-white-24:       rgba(255, 255, 255, 0.24);
+  --color-white-20:       rgba(255, 255, 255, 0.20);
+  --color-white-16:       rgba(255, 255, 255, 0.16);
+  --color-white-10:       rgba(255, 255, 255, 0.10);
+  --color-white-0:        rgba(255, 255, 255, 0);
+  --color-gray-0:         rgba(220, 220, 220, 0);
+
+  /* --- Fluid type scale --- */
+  /* Oversized watermark heading — 60px (mobile) fluidly up to 204px (desktop) */
+  --text-watermark:              clamp(60px, calc(4.6px + 13.85vw), 204px);
+  --text-watermark--line-height: 1;
 }
 
-@media (prefers-color-scheme: dark) {
+:root {
+  /* --- Text Styles: Cal Sans Display --- */
+
+  /* H1 72 — responsive */
+  --text-h1-size:        72px;
+  --text-h1-line:        80px;
+  --text-h1-weight:      400;
+  --text-h1-family:      var(--font-display);
+  --text-h1-color:       var(--color-ink-black);
+  --text-h1-tracking:    0px;
+
+  /* H2 64 */
+  --text-h2-size:        64px;
+  --text-h2-line:        68px;
+  --text-h2-weight:      400;
+  --text-h2-family:      var(--font-display);
+  --text-h2-color:       var(--color-ink-black);
+  --text-h2-tracking:    0px;
+
+  /* H3 48 — responsive */
+  --text-h3-size:        48px;
+  --text-h3-line:        56px;
+  --text-h3-weight:      400;
+  --text-h3-family:      var(--font-display);
+  --text-h3-color:       var(--color-ink-black);
+  --text-h3-tracking:    0px;
+
+  /* H4 40 — responsive */
+  --text-h4-size:        40px;
+  --text-h4-line:        48px;
+  --text-h4-weight:      400;
+  --text-h4-family:      var(--font-display);
+  --text-h4-color:       var(--color-ink-black);
+  --text-h4-tracking:    0px;
+
+  /* H5 L32 */
+  --text-h5-size:        32px;
+  --text-h5-line:        40px;
+  --text-h5-weight:      400;
+  --text-h5-family:      var(--font-display);
+  --text-h5-color:       var(--color-white);
+  --text-h5-tracking:    0px;
+
+  /* H6 24 */
+  --text-h6-size:        24px;
+  --text-h6-line:        32px;
+  --text-h6-weight:      400;
+  --text-h6-family:      var(--font-display);
+  --text-h6-color:       var(--color-white);
+  --text-h6-tracking:    0px;
+
+  /* P28 L36 Cal Sans */
+  --text-p28-cal-size:     28px;
+  --text-p28-cal-line:     36px;
+  --text-p28-cal-weight:   400;
+  --text-p28-cal-family:   var(--font-display);
+  --text-p28-cal-color:    var(--color-dark-gray);
+  --text-p28-cal-tracking: 0px;
+
+  /* P128 L128 Cal Sans (accent orange) */
+  --text-p128-size:        128px;
+  --text-p128-line:        128px;
+  --text-p128-weight:      400;
+  --text-p128-family:      var(--font-display);
+  --text-p128-color:       var(--color-orange);
+  --text-p128-tracking:    0px;
+
+  /* --- Text Styles: Inter Body --- */
+
+  /* P28 L36 Inter */
+  --text-p28-size:     28px;
+  --text-p28-line:     36px;
+  --text-p28-weight:   400;
+  --text-p28-tracking: -0.28px;
+  --text-p28-color:    var(--color-dark-gray);
+
+  /* P18 L28 */
+  --text-p18-size:     18px;
+  --text-p18-line:     28px;
+  --text-p18-weight:   400;
+  --text-p18-tracking: -0.18px;
+  --text-p18-color:    var(--color-dark-gray);
+
+  /* P16 L24 */
+  --text-p16-size:     16px;
+  --text-p16-line:     24px;
+  --text-p16-weight:   400;
+  --text-p16-tracking: -0.16px;
+  --text-p16-color:    var(--color-dark-gray);
+
+  /* P14 L20 Regular */
+  --text-p14-size:     14px;
+  --text-p14-line:     20px;
+  --text-p14-weight:   400;
+  --text-p14-tracking: -0.14px;
+  --text-p14-color:    var(--color-white);
+
+  /* P14 L20 Medium */
+  --text-p14m-size:     14px;
+  --text-p14m-line:     20px;
+  --text-p14m-weight:   500;
+  --text-p14m-tracking: -0.14px;
+  --text-p14m-color:    var(--color-white);
+
+  /* P12 L16 */
+  --text-p12-size:     12px;
+  --text-p12-line:     16px;
+  --text-p12-weight:   400;
+  --text-p12-tracking: -0.12px;
+  --text-p12-color:    var(--color-white);
+}
+
+/* --- Responsive overrides --- */
+
+/* H1: 72px base → 34px at tablet */
+@media (max-width: 1439px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --text-h1-size: 34px;
+    --text-h1-line: 40px;
+  }
+}
+
+/* H3: 48px base → 38px at tablet */
+@media (max-width: 1439px) {
+  :root {
+    --text-h3-size: 38px;
+    --text-h3-line: 56px;
+  }
+}
+
+/* H4: 40px base → 32px at tablet */
+@media (max-width: 1439px) {
+  :root {
+    --text-h4-size: 32px;
+    --text-h4-line: 48px;
+  }
+}
+
+/* P28 Cal Sans: 28px base → 20px at tablet */
+@media (max-width: 1199px) {
+  :root {
+    --text-p28-cal-size: 20px;
+    --text-p28-cal-line: 30px;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-light);
+  color: var(--color-ink-black);
+  font-family: var(--font-body);
 }
+
+@keyframes key-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-key-fade {
+  animation: key-fade-in 300ms cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-key-fade {
+    animation-duration: 200ms;
+    animation-name: key-fade-in-reduced;
+  }
+}
+
+@keyframes key-fade-in-reduced {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.btn-tactile {
+  transition: transform 150ms cubic-bezier(0.2, 0, 0, 1), background-color 200ms ease;
+  will-change: transform;
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn-tactile:hover {
+    transform: translateY(-1px);
+  }
+}
+.btn-tactile:active {
+  transform: scale(0.97) translateY(0);
+}
+
+/* --- 3D Perspective & Motion Utilities --- */
+.perspective-1200 {
+  perspective: 1200px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
