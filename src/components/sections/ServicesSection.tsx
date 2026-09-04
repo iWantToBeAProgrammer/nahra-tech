@@ -60,7 +60,7 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
           style={{ width: "clamp(180px, 20vw, 280px)", height: "clamp(100px, 12vw, 160px)", borderRadius: "16px", zIndex: 2 }}
         >
-          <Image key={tab.id} src={images.servicesBrand} alt={tab.label} fill className="object-cover transition-opacity duration-300 animate-key-fade" />
+          <Image key={tab.id} src={images.servicesBrand} alt={tab.label} fill sizes="280px" className="object-cover transition-opacity duration-300 animate-key-fade" />
         </div>
       </div>
 
