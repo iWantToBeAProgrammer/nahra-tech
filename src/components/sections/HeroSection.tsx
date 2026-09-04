@@ -78,20 +78,27 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
   const totalSlots = l3p3_start + l3p3.length;
 
   useEffect(() => {
+    let rafId = 0;
+    let start: number | null = null;
+    const durationMs = Math.ceil(totalSlots / 2) * 18;
+
+    const tick = (ts: number) => {
+      if (start === null) start = ts;
+      const elapsed = ts - start;
+      const next = Math.min(totalSlots, Math.round((elapsed / durationMs) * totalSlots));
+      setVisibleCount(next);
+      if (next < totalSlots) rafId = requestAnimationFrame(tick);
+    };
+
     const timeout = setTimeout(() => {
       setIsLoaded(true);
-      const interval = setInterval(() => {
-        setVisibleCount((prev) => {
-          if (prev >= totalSlots) {
-            clearInterval(interval);
-            return totalSlots;
-          }
-          return prev + 2;
-        });
-      }, 18);
-      return () => clearInterval(interval);
+      rafId = requestAnimationFrame(tick);
     }, 80);
-    return () => clearTimeout(timeout);
+
+    return () => {
+      clearTimeout(timeout);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, [totalSlots]);
 
   return (
@@ -109,6 +116,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                   alt="Founder"
                   width={32}
                   height={32}
+                  loading={i === 0 ? "eager" : "lazy"}
                   className="w-8 h-8 rounded-full object-cover border-2 border-smoky-white"
                   style={{
                     transform: isLoaded ? "scale(1) rotate(0deg)" : "scale(0) rotate(-12deg)",
@@ -145,6 +153,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 alt=""
                 width={82}
                 height={64}
+                loading="eager"
                 className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
                 style={{
                   width: "1.35em",
@@ -164,8 +173,8 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               <Image
                 src={heroInlines[1]}
                 alt=""
-                width={325}
-                height={256}
+                width={100}
+                height={67}
                 className="rounded-full object-cover shadow-sm inline-block align-middle rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
                 style={{
                   width: "1.35em",
@@ -186,8 +195,8 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               <Image
                 src={heroInlines[2]}
                 alt=""
-                width={324}
-                height={256}
+                width={100}
+                height={67}
                 className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-1 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
                 style={{
                   width: "1.35em",
@@ -264,7 +273,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               width={1424}
               height={801}
               className="w-full h-auto object-cover pointer-events-none"
-              priority
+              preload
             />
           </div>
         </div>

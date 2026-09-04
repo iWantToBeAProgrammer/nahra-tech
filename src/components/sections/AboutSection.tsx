@@ -1,8 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Blocks, Sparkles, Workflow, LayoutDashboard, Cloud, Wrench } from "lucide-react";
 import type { Dictionary } from "@/data/dictionaries";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+
+// Index-aligned with the `skills` array in each locale dictionary
+const skillIcons = [Blocks, Sparkles, Workflow, LayoutDashboard, Cloud, Wrench];
 
 export default function AboutSection({ dict }: { dict: Dictionary }) {
   const { about } = dict;
@@ -31,10 +35,13 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
       if (!sectionRef.current) return;
       const rect = sectionRef.current.getBoundingClientRect();
-      
+
       // Start effect when top of section reaches top of viewport (e.g. rect.top <= 100px)
       const start = 100;
       const distance = Math.max(200, rect.height * 0.5);
@@ -45,13 +52,20 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
       setActiveCount(calculatedActive);
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    const onScrollOrResize = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
   }, [about.splitAt, words.length]);
 
@@ -99,16 +113,20 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
 
         {/* Skill pills — centered */}
         <div className="flex flex-wrap justify-center gap-3">
-          {about.skills.map((skill, i) => (
-            <ScrollReveal key={skill} delay={i * 50}>
-              <span
-                className="inline-flex items-center text-white font-body"
-                style={{ background: "rgba(12,12,12,0.82)", borderRadius: "50px", padding: "12px 20px", fontSize: "14px" }}
-              >
-                {skill}
-              </span>
-            </ScrollReveal>
-          ))}
+          {about.skills.map((skill, i) => {
+            const Icon = skillIcons[i];
+            return (
+              <ScrollReveal key={skill} delay={i * 50}>
+                <span
+                  className="inline-flex items-center gap-2 text-white font-body"
+                  style={{ background: "rgba(12,12,12,0.82)", borderRadius: "50px", padding: "12px 20px", fontSize: "14px" }}
+                >
+                  {Icon && <Icon size={16} strokeWidth={2} aria-hidden />}
+                  {skill}
+                </span>
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>

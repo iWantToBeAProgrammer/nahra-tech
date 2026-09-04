@@ -35,7 +35,7 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
             >
               {/* Highlighted plan bg image */}
               {plan.highlighted && (
-                <Image src={images.pricingPremiumBg} alt="" fill className="object-cover opacity-50" />
+                <Image src={images.pricingPremiumBg} alt="" fill sizes="(min-width: 768px) 580px, 100vw" className="object-cover opacity-50" />
               )}
 
               {/* Icon placeholder */}

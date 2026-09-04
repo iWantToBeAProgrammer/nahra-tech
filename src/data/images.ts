@@ -27,11 +27,11 @@ export const images = {
   testimonialSlide3:   `${BASE}/slide3.webp`,
 
   // Works — real project screenshots
-  workBsj7Photo:       "/images/projects/Screenshot 2026-08-11 at 18.18.26.png",
-  workBarcodePhoto:    "/images/projects/Screenshot 2026-08-24 at 00.01.13.png",
-  workJomterbangPhoto: "/images/projects/Screenshot 2026-08-24 at 00.02.02.png",
-  workVidiolabPhoto:   "/images/projects/Screenshot 2026-08-24 at 00.02.27.png",
-  workCrmPhoto:        "/images/projects/Screenshot 2026-08-24 at 00.04.12.png",
+  workBsj7Photo:       "/images/projects/work-bsj7.webp",
+  workBarcodePhoto:    "/images/projects/work-barcode.webp",
+  workJomterbangPhoto: "/images/projects/work-jomterbang.webp",
+  workVidiolabPhoto:   "/images/projects/work-vidiolab.webp",
+  workCrmPhoto:        "/images/projects/work-crm.webp",
 
   // Services — brand design card image
   servicesBrand: `${BASE}/image-1787421012773.webp`,

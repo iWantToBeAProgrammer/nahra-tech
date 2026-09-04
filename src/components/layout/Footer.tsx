@@ -56,7 +56,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
 
       {/* Decorative display image at bottom */}
       <div className="relative overflow-hidden" style={{ zIndex: 1, height: "clamp(80px, 14vw, 180px)" }}>
-        <Image src={images.footerBrandBg} alt="" fill className="object-cover object-top opacity-20" aria-hidden />
+        <Image src={images.footerBrandBg} alt="" fill sizes="100vw" className="object-cover object-top opacity-20" aria-hidden />
       </div>
     </footer>
   );

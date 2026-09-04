@@ -83,6 +83,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
                     src={photo}
                     alt={work.title}
                     fill
+                    sizes="100vw"
                     className="object-cover opacity-30 filter blur-sm scale-105 transition-transform duration-700 group-hover:scale-110"
                   />
                   <div
@@ -100,6 +101,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
                         src={photo}
                         alt={work.title}
                         fill
+                        sizes="(min-width: 1024px) 760px, 100vw"
                         className="object-cover object-top"
                       />
                     </div>

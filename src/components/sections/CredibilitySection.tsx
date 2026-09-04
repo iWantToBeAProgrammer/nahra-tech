@@ -18,7 +18,10 @@ export default function CredibilitySection({ dict }: { dict: Dictionary }) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       const windowHeight = window.innerHeight;
@@ -29,17 +32,24 @@ export default function CredibilitySection({ dict }: { dict: Dictionary }) {
       setScrollProgress(progress);
     };
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
+    const onScrollOrResize = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
 
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       requestAnimationFrame(() => setScrollProgress(1));
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
+      window.removeEventListener("scroll", onScrollOrResize);
+      window.removeEventListener("resize", onScrollOrResize);
     };
   }, []);
 
@@ -78,7 +88,7 @@ export default function CredibilitySection({ dict }: { dict: Dictionary }) {
         {/* LEFT — Stats with real background image */}
         <div className="flex flex-col gap-4">
           <div className="rounded-2xl overflow-hidden relative" style={{ minHeight: "200px" }}>
-            <Image src={images.testimonialStatsBg} alt="" fill className="object-cover opacity-60" />
+            <Image src={images.testimonialStatsBg} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover opacity-60" />
             <div className="relative z-10 p-8 h-full flex flex-col justify-center gap-2"
               style={{ background: "rgba(12,12,12,0.65)" }}>
               <span className="font-display leading-none text-white" style={{ fontSize: "clamp(48px, 6vw, 80px)" }}>
@@ -116,7 +126,7 @@ export default function CredibilitySection({ dict }: { dict: Dictionary }) {
             }}
           >
             {/* Photo background */}
-            <Image key={`cred-img-${active}`} src={slideImages[active]} alt="" fill className="object-cover transition-opacity duration-300 ease-out animate-key-fade" />
+            <Image key={`cred-img-${active}`} src={slideImages[active]} alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover transition-opacity duration-300 ease-out animate-key-fade" />
             <div className="absolute inset-0" style={{ background: "rgba(12,12,12,0.80)" }} />
 
             {/* Counter */}

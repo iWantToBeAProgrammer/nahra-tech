@@ -39,7 +39,7 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
         }}
       >
         {/* Real contact background image */}
-        <Image src={images.contactBg} alt="" fill className="object-cover opacity-30" />
+        <Image src={images.contactBg} alt="" fill sizes="100vw" className="object-cover opacity-30" />
         <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.7)" }} aria-hidden />
 
         <div className="relative grid grid-cols-1 md:grid-cols-2 gap-16" style={{ zIndex: 1 }}>
