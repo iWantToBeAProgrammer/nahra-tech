@@ -6,7 +6,7 @@ export const en: Dictionary = {
     fullName: "Nahra Tech",
     tagline: "External Engineering Partner",
     email: "hello@nahra.tech",
-    location: "Remote-first",
+    location: "Jakarta",
     copyright: "© 2026 Nahra Tech. All rights reserved.",
     nav: {
       badge: "External Engineering Partner — Est. 2023",
@@ -344,5 +344,14 @@ export const en: Dictionary = {
       { label: "Talk to an Engineer", href: "mailto:hello@nahra.tech" },
       { label: "Discuss via WhatsApp", href: "https://wa.me/6281200000000" },
     ],
+    form: {
+      nameLabel: "Your Name",
+      namePlaceholder: "Enter your Name",
+      emailLabel: "Your Email",
+      emailPlaceholder: "Enter the Email",
+      messageLabel: "Project Description",
+      messagePlaceholder: "Type Here...",
+      submitLabel: "Send Now",
+    },
   },
 };

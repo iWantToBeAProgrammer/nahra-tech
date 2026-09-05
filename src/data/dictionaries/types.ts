@@ -96,5 +96,14 @@ export type Dictionary = {
     email: string;
     whatsapp: { display: string; href: string };
     ctas: { label: string; href: string }[];
+    form: {
+      nameLabel: string;
+      namePlaceholder: string;
+      emailLabel: string;
+      emailPlaceholder: string;
+      messageLabel: string;
+      messagePlaceholder: string;
+      submitLabel: string;
+    };
   };
 };

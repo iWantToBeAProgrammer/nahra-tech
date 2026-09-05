@@ -68,5 +68,4 @@ export const images = {
 
   // Footer backgrounds
   footerBg:       `${BASE}/image-1787421017113.webp`,
-  footerBrandBg:  `${BASE}/image-1787421018321.webp`,
 };

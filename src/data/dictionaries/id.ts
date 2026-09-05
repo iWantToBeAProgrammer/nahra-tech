@@ -6,7 +6,7 @@ export const id: Dictionary = {
     fullName: "Nahra Tech",
     tagline: "Partner Engineering Eksternal",
     email: "hello@nahra.tech",
-    location: "Remote-first",
+    location: "Jakarta",
     copyright: "© 2026 Nahra Tech. Seluruh hak cipta dilindungi.",
     nav: {
       badge: "Partner Engineering Eksternal — Berdiri 2023",
@@ -380,5 +380,14 @@ export const id: Dictionary = {
       { label: "Diskusi dengan Engineer", href: "mailto:hello@nahra.tech" },
       { label: "Diskusi via WhatsApp", href: "https://wa.me/6281200000000" },
     ],
+    form: {
+      nameLabel: "Nama Anda",
+      namePlaceholder: "Masukkan nama Anda",
+      emailLabel: "Email Anda",
+      emailPlaceholder: "Masukkan email Anda",
+      messageLabel: "Deskripsi Proyek",
+      messagePlaceholder: "Ketik di sini...",
+      submitLabel: "Kirim Sekarang",
+    },
   },
 };
