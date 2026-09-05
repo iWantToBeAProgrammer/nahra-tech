@@ -36,20 +36,23 @@ export default function Footer({ dict }: { dict: Dictionary }) {
   return (
     <footer
       className="mx-3 mb-3 overflow-hidden relative"
-      style={{ background: "rgb(10,10,10)", borderRadius: "32px" }}
+      style={{ background: "#140806", borderRadius: "32px" }}
     >
-      {/* Subtle dot-grid texture */}
+      {/* Fine crosshatch micro-texture — strongest low near the glow, fading out before the dark upper area */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: "radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px)",
-          backgroundSize: "18px 18px",
+          backgroundImage:
+            "repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 6px), " +
+            "repeating-linear-gradient(-45deg, rgba(255,255,255,0.05) 0px, rgba(255,255,255,0.05) 1px, transparent 1px, transparent 6px)",
+          maskImage: "linear-gradient(to top, black 0%, black 22%, transparent 52%)",
+          WebkitMaskImage: "linear-gradient(to top, black 0%, black 22%, transparent 52%)",
           zIndex: 0,
         }}
         aria-hidden
       />
 
-      {/* Soft diagonal light beam, top area */}
+      {/* Soft diagonal light beam, top area — kept extremely subtle so the upper half stays near-black */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -57,20 +60,30 @@ export default function Footer({ dict }: { dict: Dictionary }) {
           right: "-10%",
           width: "70%",
           height: "80%",
-          background: "linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%)",
+          background: "linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 60%)",
           filter: "blur(40px)",
           zIndex: 0,
         }}
         aria-hidden
       />
 
-      {/* Orange glow — empty in the middle, spreading from both sides */}
+      {/* Warm ember glow — enters from the bottom-left edge as a tall, soft vertical plume (not a
+          bottom-anchored band), fading rapidly toward the center; a smaller, subtler echo bleeds in
+          from the bottom-right. Multiple irregular, overlapping blobs keep the falloff organic. */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 60% 80% at 0% 100%, rgba(255,90,0,0.7) 0%, transparent 65%), " +
-            "radial-gradient(ellipse 60% 80% at 100% 100%, rgba(255,90,0,0.7) 0%, transparent 65%)",
+            // very faint ambient brown wash low in the middle — the only thing allowed near center
+            "radial-gradient(ellipse 60% 30% at 50% 100%, rgba(111,35,4,0.12) 0%, transparent 70%), " +
+            // small bright ember hotspot at the bottom-left corner
+            "radial-gradient(ellipse 22% 16% at 6% 100%, #FFB066 0%, #D9570A 40%, transparent 85%), " +
+            // dominant glow, hugging the left edge, tall rather than wide — reads as light spilling in from off-frame
+            "radial-gradient(ellipse 42% 115% at 0% 96%, #D9570A 0%, #B83F05 20%, #8F2D04 38%, #6F2304 55%, rgba(36,16,6,0.35) 72%, transparent 88%), " +
+            // dark patch interrupting the left glow so it doesn't read as one flat region
+            "radial-gradient(ellipse 16% 20% at 16% 82%, rgba(20,8,6,0.5) 0%, transparent 75%), " +
+            // subtler, smaller echo bleeding in from the bottom-right edge
+            "radial-gradient(ellipse 26% 55% at 100% 100%, rgba(217,87,10,0.4) 0%, rgba(111,35,4,0.2) 40%, transparent 75%)",
           zIndex: 0,
         }}
         aria-hidden
@@ -84,7 +97,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
               <span className="font-body text-white/40" style={{ fontSize: "13px" }}>{col.label}</span>
               {col.links.map((l) => (
                 <Link key={l.label} href={l.href}
-                  className="font-display text-white hover:text-[rgb(255,77,0)] transition-colors" style={{ fontSize: "22px" }}
+                  className="font-display text-white hover:text-orange transition-colors" style={{ fontSize: "22px" }}
                 >
                   {l.label}
                 </Link>
@@ -101,7 +114,7 @@ export default function Footer({ dict }: { dict: Dictionary }) {
           </span>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="justify-self-end font-body transition-opacity hover:opacity-70" style={{ fontSize: "13px", color: "rgb(255,77,0)" }}
+            className="justify-self-end font-body text-orange transition-opacity hover:opacity-70" style={{ fontSize: "13px" }}
           >
             {site.footer.backToTop}
           </button>
