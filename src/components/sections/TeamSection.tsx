@@ -1,7 +1,6 @@
-import Image from "next/image";
 import type { Dictionary } from "@/data/dictionaries";
-import { images } from "@/data/images";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import TeamMosaic from "./TeamMosaic";
 
 export default function TeamSection({ dict }: { dict: Dictionary }) {
   const { team, site } = dict;
@@ -40,7 +39,7 @@ export default function TeamSection({ dict }: { dict: Dictionary }) {
           {/* LEFT — Team portrait */}
           <ScrollReveal delay={0}>
             <div className="relative" style={{ borderRadius: "20px", overflow: "hidden", minHeight: "480px" }}>
-              <Image src={images.founderPhoto} alt="The Nahra team" fill sizes="(min-width: 768px) 50vw, 100vw" className="object-cover" />
+              <TeamMosaic />
               <div className="absolute inset-0" style={{ background: "rgba(0,0,0,0.15)" }} />
 
               {/* Social icons — bottom-left */}

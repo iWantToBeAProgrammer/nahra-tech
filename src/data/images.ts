@@ -47,8 +47,14 @@ export const images = {
     partnership: "/images/services/ongoing-engineering.webp",
   } as Record<string, string>,
 
-  // Team section
-  founderPhoto: `${BASE}/image-1787421013352.webp`,
+  // Team section — individual member mosaic
+  teamPhotos: [
+    "/images/team/team-1.jpeg",
+    "/images/team/team-2.jpeg",
+    "/images/team/team-3.jpeg",
+    "/images/team/team-4.jpeg",
+    "/images/team/team-5.jpeg",
+  ],
 
   // Engagement — highlighted plan gradient background
   pricingPremiumBg: `${BASE}/image-1787421013382.webp`,
