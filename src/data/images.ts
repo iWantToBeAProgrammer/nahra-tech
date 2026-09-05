@@ -59,6 +59,10 @@ export const images = {
   // Engagement — highlighted plan gradient background
   pricingPremiumBg: `${BASE}/image-1787421013382.webp`,
 
+  // Engagement — brand mark watermark behind each plan card
+  brandMarkNavy: "/images/logo/nahra_tech_icon_navy.png",
+  brandMarkGold: "/images/logo/nahra_tech_icon_gold.png",
+
   // Contact section background
   contactBg: `${BASE}/image-1787421013439.webp`,
 
