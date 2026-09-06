@@ -7,6 +7,14 @@ interface ScrollRevealProps {
   className?: string;
   delay?: number;
   threshold?: number;
+  /**
+   * Shrinks the observed viewport from the bottom (e.g. "0px 0px -20% 0px")
+   * so a tall element only reveals once it's meaningfully in view, instead
+   * of as soon as a sliver of its top edge crosses in — the default
+   * `threshold` alone triggers too early on large elements since 15% of a
+   * tall element's own area is a small peek, not a real arrival.
+   */
+  rootMargin?: string;
   /** Light blur-in + scale-up on top of the usual fade + translateY — for small, staggered items (cards, pills), not the heavier headline-scale reveal. */
   blur?: boolean;
 }
@@ -16,6 +24,7 @@ export default function ScrollReveal({
   className = "",
   delay = 0,
   threshold = 0.15,
+  rootMargin,
   blur = false,
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -37,7 +46,7 @@ export default function ScrollReveal({
           observer.disconnect();
         }
       },
-      { threshold }
+      { threshold, rootMargin }
     );
 
     if (ref.current) {
@@ -45,7 +54,7 @@ export default function ScrollReveal({
     }
 
     return () => observer.disconnect();
-  }, [threshold]);
+  }, [threshold, rootMargin]);
 
   const revealed = isVisible || isReducedMotion;
   // Blur variant is tuned for small staggered items: quicker and subtler
