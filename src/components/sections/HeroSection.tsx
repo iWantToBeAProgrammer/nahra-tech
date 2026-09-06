@@ -5,48 +5,10 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import type { Dictionary } from "@/data/dictionaries";
 import { images } from "@/data/images";
+import TypewriterChars from "@/components/ui/TypewriterChars";
 
 const heroAvatars = [images.heroAvatar1, images.heroAvatar2, images.heroAvatar3];
 const heroInlines = [images.heroInline1, images.heroInline2, images.heroInline3];
-
-function TypewriterChars({
-  text,
-  startIndex,
-  visibleCount,
-  className = "",
-  style = {},
-}: {
-  text: string;
-  startIndex: number;
-  visibleCount: number;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  return (
-    <span className={className} style={style}>
-      {text.split("").map((char, i) => {
-        const charIndex = startIndex + i;
-        const isRevealed = charIndex < visibleCount;
-        return (
-          <span
-            key={`char-${startIndex + i}`}
-            style={{
-              display: "inline-block",
-              whiteSpace: char === " " ? "pre" : "normal",
-              filter: isRevealed ? "blur(0px)" : "blur(4px)",
-              opacity: isRevealed ? 1 : 0,
-              transform: isRevealed ? "translateY(0)" : "translateY(3px)",
-              transition: "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
-              willChange: "filter, opacity, transform",
-            }}
-          >
-            {char}
-          </span>
-        );
-      })}
-    </span>
-  );
-}
 
 export default function HeroSection({ dict }: { dict: Dictionary }) {
   const { hero } = dict;
