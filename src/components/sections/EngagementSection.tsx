@@ -15,6 +15,10 @@ const planIcons = [Hammer, RefreshCw, Handshake];
 const STICKY_TOP_PX = 24;
 const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
 
+// Alternating left/right tilt per card, like a messy paper stack — index-
+// driven (not a fixed array) so it holds up for any number of plans.
+const cardTilt = (i: number) => (i % 2 === 0 ? -1 : 1) * (2 + (i % 3) * 0.7);
+
 export default function EngagementSection({ dict }: { dict: Dictionary }) {
   const { engagement } = dict;
   const total = engagement.plans.length;
@@ -47,7 +51,7 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
         const raw = (viewportH - nextTop) / distance;
         const progress = easeOutCubic(Math.min(1, Math.max(0, raw)));
 
-        card.style.transform = `scale(${(1 - progress * 0.05).toFixed(3)}) translateY(${(-progress * 12).toFixed(1)}px)`;
+        card.style.transform = `rotate(${(progress * cardTilt(i)).toFixed(2)}deg) scale(${(1 - progress * 0.05).toFixed(3)}) translateY(${(-progress * 12).toFixed(1)}px)`;
         if (scrim) scrim.style.opacity = (progress * 0.45).toFixed(2);
       }
     };
