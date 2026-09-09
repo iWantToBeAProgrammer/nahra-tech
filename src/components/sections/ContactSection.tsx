@@ -94,7 +94,7 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
             marginTop: "-0.15em",
             marginLeft: "-0.15em",
             marginRight: "-0.15em",
-            marginBottom: "clamp(-64px, calc(-1.45px - 4.36vw), -19px)",
+            marginBottom: "0.15em",
           }}
         >
           {contact.label}

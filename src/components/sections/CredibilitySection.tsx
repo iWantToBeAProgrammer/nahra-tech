@@ -66,14 +66,14 @@ export default function CredibilitySection({ dict }: { dict: Dictionary }) {
       <ScrollReveal delay={60}>
         <div className="relative flex justify-center px-4 text-center pointer-events-none select-none" aria-hidden>
           <span
-            className="font-display text-watermark bg-clip-text text-[40px] sm:text-[72px] md:text-[100px] lg:text-[120px]"
+            className="font-display text-watermark bg-clip-text text-[28px] sm:text-[56px] md:text-[80px] lg:text-[100px]"
             style={{
               backgroundImage: "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 159%)",
               color: "rgba(12,12,12,0.82)",
               WebkitTextFillColor: "transparent",
               padding: "0.1em",
               marginTop: "-0.1em",
-              marginBottom: "-0.35em",
+              marginBottom: "0.15em",
             }}
           >
             {credibility.heading}

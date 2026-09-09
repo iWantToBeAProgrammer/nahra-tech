@@ -198,7 +198,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
           aria-hidden
         >
           <span
-            className="font-display text-watermark bg-clip-text text-[40px] sm:text-[72px] md:text-[100px] lg:text-[120px]"
+            className="font-display text-watermark bg-clip-text text-[28px] sm:text-[56px] md:text-[80px] lg:text-[100px]"
             style={{
               backgroundImage:
                 "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 159%)",
@@ -206,7 +206,7 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
               WebkitTextFillColor: "transparent",
               padding: "0.1em",
               marginTop: "-0.1em",
-              marginBottom: "-0.35em",
+              marginBottom: "0.15em",
             }}
           >
             {works.heading}
