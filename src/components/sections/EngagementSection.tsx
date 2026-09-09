@@ -74,7 +74,7 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
   }, [total]);
 
   return (
-    <section id="partners" className="bg-bg-light px-4 py-10 sm:px-6 sm:py-16 md:px-14 md:py-20 lg:px-28 lg:py-28">
+    <section id="partners" className="bg-bg-light px-4 py-10 sm:px-6 sm:py-16 md:px-14 md:py-20">
       {/* Header — centered */}
       <div className="flex flex-col items-center gap-3 mb-10 sm:mb-14 text-center">
         <SectionLabel>{engagement.label}</SectionLabel>

@@ -80,7 +80,7 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
     "bg-transparent font-body text-white placeholder-white/30 outline-none pb-3 w-full border-0 border-b border-white/20 focus:border-white/60 transition-colors";
 
   return (
-    <section id="contact" className="relative bg-bg-light overflow-hidden" style={{ paddingTop: "clamp(24px, 4vw, 56px)", paddingBottom: "clamp(24px, 4vw, 56px)" }}>
+    <section id="contact" className="relative bg-bg-light overflow-hidden py-10 sm:py-16 md:py-20">
 
       {/* "Let's Build Something" huge faded text — fades to transparent toward the bottom, softened with a blur */}
       <div className="relative flex justify-center px-6 text-center pointer-events-none select-none" aria-hidden>

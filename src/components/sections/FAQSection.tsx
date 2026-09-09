@@ -137,7 +137,7 @@ export default function FAQSection({ dict }: { dict: Dictionary }) {
   }, [totalChars]);
 
   return (
-    <section className="bg-bg-light px-4 py-10 sm:px-6 sm:py-16 md:px-14 md:py-20 lg:px-14 lg:py-28">
+    <section className="bg-bg-light px-4 py-10 sm:px-6 sm:py-16 md:px-14 md:py-20">
       <div className="mx-auto" style={{ maxWidth: "1080px" }}>
         {/* Header — centered, per-character reveal driven by visibleCount above */}
         <div ref={headerRef} className="flex flex-col items-center gap-3 mb-4 text-center">

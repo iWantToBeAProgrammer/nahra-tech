@@ -182,10 +182,10 @@ export default function WorksSection({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="work"
-      className="relative bg-bg-light pb-12 sm:pb-20 md:pb-28"
+      className="relative bg-bg-light pb-10 sm:pb-16 md:pb-20"
     >
       {/* Centered label */}
-      <div className="relative z-10 flex justify-center text-center px-4 pt-6 sm:pt-10 md:pt-14">
+      <div className="relative z-10 flex justify-center text-center px-4 pt-4 sm:pt-8 md:pt-10">
         <span className="font-body text-dark-gray text-[12px] sm:text-[13px]">
           {works.label}
         </span>

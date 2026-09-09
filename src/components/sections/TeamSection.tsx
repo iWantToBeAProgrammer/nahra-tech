@@ -6,10 +6,10 @@ export default function TeamSection({ dict }: { dict: Dictionary }) {
   const { team, site } = dict;
 
   return (
-    <section id="team" className="relative bg-bg-light overflow-hidden pb-12 sm:pb-20 md:pb-28">
+    <section id="team" className="relative bg-bg-light overflow-hidden pb-10 sm:pb-16 md:pb-20">
 
       {/* Centered label */}
-      <div className="relative z-10 flex justify-center text-center px-4 sm:px-6 pt-6 sm:pt-10 md:pt-14">
+      <div className="relative z-10 flex justify-center text-center px-4 sm:px-6 pt-4 sm:pt-8 md:pt-10">
         <span className="font-body text-dark-gray text-[13px]">{team.label}</span>
       </div>
 

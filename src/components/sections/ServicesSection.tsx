@@ -109,7 +109,7 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="services"
-      className="bg-bg-light overflow-hidden flex flex-col py-10 sm:py-16 md:py-24"
+      className="bg-bg-light overflow-hidden flex flex-col py-10 sm:py-16 md:py-20"
     >
       {/* Header + tabs */}
       <div className="px-4 sm:px-6 md:px-14">

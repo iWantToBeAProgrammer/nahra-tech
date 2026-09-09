@@ -70,7 +70,7 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
   }, [about.splitAt, words.length]);
 
   return (
-    <section ref={sectionRef} className="bg-bg-light pt-4 pb-14 sm:pt-10 sm:pb-20 md:pt-16 md:pb-28 px-4 sm:px-6">
+    <section ref={sectionRef} className="bg-bg-light pt-4 pb-10 sm:pt-8 sm:pb-16 md:pt-10 md:pb-20 px-4 sm:px-6">
       <div className="flex flex-col items-center text-center max-w-[1000px] mx-auto">
         {/* "(hello)" label — handwritten script accent with slide-to-right reveal */}
         <div
