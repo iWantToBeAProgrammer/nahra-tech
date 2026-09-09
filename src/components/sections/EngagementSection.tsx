@@ -232,20 +232,20 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
                 <div className="mt-3.5 sm:mt-7" style={{ borderTop: `1px solid ${plan.highlighted ? "rgba(255,255,255,0.14)" : "rgba(19,19,19,0.12)"}` }} />
 
                 {/* Row 3 — delivery (left) / CTA (right) */}
-                <div className="flex items-center justify-between gap-4 pt-3.5 sm:pt-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 pt-3.5 sm:pt-6">
                   <span
                     className="font-body text-[12px] sm:text-[13px]"
-                    style={{ color: plan.highlighted ? "rgba(255,255,255,0.5)" : "rgb(92,92,92)" }}
+                    style={{ color: plan.highlighted ? "rgba(255,255,255,0.6)" : "rgb(92,92,92)" }}
                   >
                     {plan.delivery}
                   </span>
 
                   <Link
                     href="#contact"
-                    className="btn-tactile inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full font-body font-medium text-[13px] sm:text-[15px] transition-colors px-4 py-2.5 sm:px-5 sm:py-3"
+                    className="btn-tactile inline-flex items-center justify-center gap-2 rounded-full font-body font-medium text-[14px] sm:text-[15px] transition-colors whitespace-nowrap px-5 py-3 sm:px-6 sm:py-3 w-full sm:w-auto text-center"
                     style={{
-                      background: "rgba(12,12,12,0.82)",
-                      color: "white",
+                      background: plan.highlighted ? "rgb(255,255,255)" : "rgba(12,12,12,0.88)",
+                      color: plan.highlighted ? "rgb(19,19,19)" : "white",
                       borderRadius: "50px",
                     }}
                   >
