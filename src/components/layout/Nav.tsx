@@ -47,23 +47,19 @@ export default function Nav({ dict, lang }: { dict: Dictionary; lang: Locale }) 
             willChange: "transform, opacity",
           }}
         >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0 pointer-events-none">
+            <path d="M0 0 H18 V18 A18 18 0 0 0 0 0 Z" fill="rgba(12,12,12,0.82)" />
+          </svg>
           <span
-            aria-hidden
-            className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0"
-            style={{ background: "radial-gradient(circle at bottom left, rgb(240,240,240) 15px, rgba(12,12,12,0.82) 15px)" }}
-          />
-          <span
-            className="inline-flex items-center gap-1.5 sm:gap-2 text-white text-[11px] sm:text-[13px] font-body shrink-0 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-b-[18px] sm:rounded-b-[32px] max-w-[90vw] truncate"
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-white text-[11px] sm:text-[13px] font-body shrink-0 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-b-[14px] sm:rounded-b-[20px] max-w-[90vw] truncate"
             style={{ background: "rgba(12,12,12,0.82)" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green shrink-0" />
             {dict.site.nav.badge}
           </span>
-          <span
-            aria-hidden
-            className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0"
-            style={{ background: "radial-gradient(circle at bottom right, rgb(240,240,240) 15px, rgba(12,12,12,0.82) 15px)" }}
-          />
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0 pointer-events-none">
+            <path d="M18 0 H0 V18 A18 18 0 0 1 18 0 Z" fill="rgba(12,12,12,0.82)" />
+          </svg>
         </div>
       </div>
 
