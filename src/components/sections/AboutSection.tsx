@@ -70,15 +70,15 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
   }, [about.splitAt, words.length]);
 
   return (
-    <section ref={sectionRef} className="bg-bg-light" style={{ padding: "112px 0" }}>
-      <div className="flex flex-col items-center text-center px-8" style={{ maxWidth: "1200px", margin: "0 auto" }}>
+    <section ref={sectionRef} className="bg-bg-light pt-4 pb-14 sm:pt-10 sm:pb-20 md:pt-16 md:pb-28 px-4 sm:px-6">
+      <div className="flex flex-col items-center text-center max-w-[1000px] mx-auto">
         {/* "(hello)" label — handwritten script accent with slide-to-right reveal */}
         <div
           ref={helloRef}
-          className="text-orange mb-6"
+          className="text-orange mb-3 sm:mb-6"
           style={{
             fontFamily: "var(--font-handwriting)",
-            fontSize: "clamp(32px, 4.5vw, 44px)",
+            fontSize: "clamp(26px, 4vw, 44px)",
             lineHeight: 1,
             transform: isHelloVisible ? "translateX(0)" : "translateX(-32px)",
             opacity: isHelloVisible ? 1 : 0,
@@ -91,37 +91,38 @@ export default function AboutSection({ dict }: { dict: Dictionary }) {
 
         {/* Big reveal text — centered, two-tone scroll reveal */}
         <p
-          className="font-display leading-tight mb-12"
-          style={{ fontSize: "clamp(28px, 4vw, 48px)", lineHeight: "1.15" }}
+          className="font-display leading-[1.28] sm:leading-[1.18] mb-8 sm:mb-12 max-w-[900px]"
+          style={{ fontSize: "clamp(22px, 3.6vw, 48px)" }}
         >
           {words.map((word, i) => {
             const isRevealed = i < activeCount;
             return (
               <span
                 key={i}
+                className="inline-block whitespace-nowrap"
                 style={{
                   color: isRevealed ? "rgb(19, 19, 19)" : "rgb(140, 140, 140)",
                   opacity: isRevealed ? 1 : 0.45,
                   transition: "color 250ms ease-out, opacity 250ms ease-out",
                 }}
               >
-                {word}{" "}
+                {word}&nbsp;
               </span>
             );
           })}
         </p>
 
         {/* Skill pills — centered */}
-        <div className="flex flex-wrap justify-center gap-3">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
           {about.skills.map((skill, i) => {
             const Icon = skillIcons[i];
             return (
               <ScrollReveal key={skill} delay={i * 50}>
                 <span
-                  className="inline-flex items-center gap-2 text-white font-body"
-                  style={{ background: "rgba(12,12,12,0.82)", borderRadius: "50px", padding: "12px 20px", fontSize: "14px" }}
+                  className="inline-flex items-center gap-1.5 sm:gap-2 text-white font-body px-3.5 py-2 sm:px-5 sm:py-3 text-[13px] sm:text-[14px]"
+                  style={{ background: "rgba(12,12,12,0.82)", borderRadius: "50px" }}
                 >
-                  {Icon && <Icon size={16} strokeWidth={2} aria-hidden />}
+                  {Icon && <Icon size={15} strokeWidth={2} aria-hidden />}
                   {skill}
                 </span>
               </ScrollReveal>

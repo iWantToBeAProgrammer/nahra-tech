@@ -9,14 +9,14 @@ export default function TickerSection({ dict }: { dict: Dictionary }) {
   const blackItems = [...b, ...b, ...b, ...b];
 
   return (
-    <section className="relative bg-bg-light overflow-hidden" style={{ height: "360px" }}>
+    <section className="relative bg-bg-light overflow-hidden h-[110px] sm:h-[180px] md:h-[260px]">
       {/* Orange strip — rotates "/" (lower-left → upper-right) */}
       <div
-        className="absolute overflow-hidden"
+        className="absolute overflow-hidden h-[44px] sm:h-[58px] md:h-[72px]"
         style={{
-          width: "220%", height: "72px",
+          width: "220%",
           left: "-60%", top: "50%",
-          transform: "translateY(-50%) rotate(-8deg)",
+          transform: "translateY(-50%) rotate(-5deg)",
           background: "rgb(255,77,0)",
         }}
       >
@@ -25,7 +25,7 @@ export default function TickerSection({ dict }: { dict: Dictionary }) {
           style={{ width: "max-content", animation: "ag-ticker-l 22s linear infinite" }}
         >
           {orangeItems.map((item, i) => (
-            <span key={i} className="font-display text-white inline-flex items-center gap-6" style={{ fontSize: "28px", padding: "0 28px" }}>
+            <span key={i} className="font-display text-white inline-flex items-center gap-3 sm:gap-6 text-[15px] sm:text-[22px] md:text-[28px] px-3 sm:px-6">
               {item} <span className="opacity-40">×</span>
             </span>
           ))}
@@ -34,11 +34,11 @@ export default function TickerSection({ dict }: { dict: Dictionary }) {
 
       {/* Black strip — rotates "\" (upper-left → lower-right), sits on top */}
       <div
-        className="absolute overflow-hidden"
+        className="absolute overflow-hidden h-[44px] sm:h-[58px] md:h-[72px]"
         style={{
-          width: "220%", height: "72px",
+          width: "220%",
           left: "-60%", top: "50%",
-          transform: "translateY(-50%) rotate(8deg)",
+          transform: "translateY(-50%) rotate(5deg)",
           background: "rgb(0,0,0)",
           zIndex: 2,
         }}
@@ -48,7 +48,7 @@ export default function TickerSection({ dict }: { dict: Dictionary }) {
           style={{ width: "max-content", animation: "ag-ticker-r 22s linear infinite" }}
         >
           {blackItems.map((item, i) => (
-            <span key={i} className="font-display text-white inline-flex items-center gap-6" style={{ fontSize: "28px", padding: "0 28px" }}>
+            <span key={i} className="font-display text-white inline-flex items-center gap-3 sm:gap-6 text-[15px] sm:text-[22px] md:text-[28px] px-3 sm:px-6">
               {item} <span className="opacity-40">×</span>
             </span>
           ))}
