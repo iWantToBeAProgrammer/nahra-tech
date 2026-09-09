@@ -109,31 +109,34 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
   return (
     <section
       id="services"
-      className="bg-bg-light overflow-hidden flex flex-col"
-      style={{ minHeight: "100dvh", paddingTop: "112px", paddingBottom: "80px" }}
+      className="bg-bg-light overflow-hidden flex flex-col py-10 sm:py-16 md:py-24"
     >
       {/* Header + tabs */}
-      <div className="px-6 md:px-14">
-        <div className="flex flex-col gap-2 mb-6">
-          <span className="font-body text-dark-gray text-[13px]">{services.label}</span>
-          <h2 className="font-display text-ink-black leading-none" style={{ fontSize: "clamp(36px, 5vw, 64px)" }}>
+      <div className="px-4 sm:px-6 md:px-14">
+        <div className="flex flex-col gap-1.5 sm:gap-2 mb-4 sm:mb-6">
+          <span className="font-body text-dark-gray text-[12px] sm:text-[13px]">{services.label}</span>
+          <h2 className="font-display text-ink-black leading-[1.1] max-w-[760px]" style={{ fontSize: "clamp(24px, 4.8vw, 64px)" }}>
             {services.heading}
           </h2>
         </div>
 
         {/* Divider */}
-        <div style={{ borderTop: "1px solid rgba(19,19,19,0.12)", marginBottom: "24px" }} />
+        <div style={{ borderTop: "1px solid rgba(19,19,19,0.12)", marginBottom: "16px" }} />
 
-        {/* Tab row */}
-        <div className="flex items-center gap-10 mb-8">
+        {/* Tab row — scrollable horizontal pills on mobile */}
+        <div className="flex items-center gap-2 sm:gap-6 mb-6 sm:mb-8 overflow-x-auto no-scrollbar pb-2 pt-1 -mx-2 px-2">
           {services.tabs.map((t) => {
             const isActive = t.id === activeTab;
             return (
               <button
                 key={t.id}
                 onClick={() => selectTab(t.id)}
-                className="flex items-center gap-2 font-body font-medium transition-colors"
-                style={{ fontSize: "14px", color: isActive ? "rgb(19,19,19)" : "rgb(92,92,92)" }}
+                className="flex items-center gap-1.5 font-body font-medium transition-all shrink-0 whitespace-nowrap px-3.5 py-2 rounded-full"
+                style={{
+                  fontSize: "13px",
+                  color: isActive ? "rgb(19,19,19)" : "rgb(115,115,115)",
+                  background: isActive ? "rgba(19,19,19,0.08)" : "transparent",
+                }}
               >
                 {isActive && <span className="w-1.5 h-1.5 rounded-full bg-orange shrink-0" />}
                 {t.label}
@@ -143,36 +146,31 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
         </div>
       </div>
 
-      {/* Huge orange scrolling text + floating card. minHeight matches the
-          card's own size clamp (plus breathing room) so this region never
-          gets squeezed shorter than the card — that squeeze was clipping the
-          card's top/bottom against overflow-hidden. The section's 100dvh is
-          a floor, not a ceiling: on tighter viewports it grows taller rather
-          than crushing the card. */}
-      <div className="relative overflow-hidden flex-1" style={{ minHeight: "clamp(220px, 26vw, 420px)" }}>
-        {/* Scrolling orange text — swaps instantly (no crossfade): it's a
-            continuously-moving decorative background, and stacking two
-            copies here would break the w-max marquee width math. */}
+      {/* Huge orange scrolling text + floating card. minHeight is derived
+          from the card's own width formula (min(88vw, 640px)) via its
+          1280/780 aspect ratio, plus breathing room — it must never be
+          shorter than the card itself, or this container's overflow-hidden
+          clips the card's top/bottom, slicing off its rounded corners. */}
+      <div className="relative overflow-hidden flex-1 my-2 sm:my-4" style={{ minHeight: "calc(min(88vw, 640px) * 780 / 1280 + 32px)" }}>
+        {/* Scrolling orange text */}
         <div
-          className="absolute inset-0 flex items-center whitespace-nowrap w-max font-display text-orange"
-          style={{ fontSize: "clamp(60px, 10vw, 120px)", lineHeight: 1, animation: "svc-ticker 70s linear infinite" }}
+          className="absolute inset-0 flex items-center whitespace-nowrap w-max font-display text-orange opacity-90"
+          style={{ fontSize: "clamp(32px, 8vw, 120px)", lineHeight: 1, animation: "svc-ticker 70s linear infinite" }}
         >
-          {/* key={tab.id} remounts just this span on switch — safe here
-              (unlike the card image/paragraph) since it's a single element,
-              not a crossfading pair, so remounting is exactly what retriggers
-              svc-ticker-dip each time. The dip (a quick opacity flicker,
-              same duration as the crossfade) softens what would otherwise be
-              an instant text swap into something that at least feels
-              intentional alongside the rest of the transition. */}
           <span key={tab.id} className="svc-ticker-dip">{repeated}</span>
         </div>
 
-        {/* Floating product card with real image — 1640×1000 native (1.64:1),
-            matched here so nothing gets cropped. Two persistent <Image>
-            layers (never remounted) crossfade via className only. */}
+        {/* Floating product card with real image — 1280×780 native (1.641:1) */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 overflow-hidden"
-          style={{ width: "clamp(320px, 40vw, 640px)", aspectRatio: "1640 / 1000", borderRadius: "clamp(16px, 2vw, 24px)", zIndex: 2 }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[20px] sm:rounded-[28px] overflow-hidden border-2 border-white/25 shadow-2xl bg-[#0c0c0c]"
+          style={{
+            width: "min(88vw, 640px)",
+            aspectRatio: "1280 / 780",
+            borderRadius: "20px",
+            clipPath: "inset(0 round 20px)",
+            WebkitClipPath: "inset(0 round 20px)",
+            zIndex: 2,
+          }}
         >
           {(["A", "B"] as const).map((key) => {
             const layerT = services.tabs.find((t) => t.id === layerTab[key])!;
@@ -184,8 +182,8 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
                 alt={isFront ? layerT.label : ""}
                 aria-hidden={!isFront}
                 fill
-                sizes="(min-width: 1024px) 640px, 40vw"
-                className={`object-cover svc-crossfade${isFront ? " svc-crossfade--front" : ""}`}
+                sizes="(min-width: 1024px) 640px, 88vw"
+                className={`object-cover rounded-[18px] sm:rounded-[26px] svc-crossfade${isFront ? " svc-crossfade--front" : ""}`}
                 style={{ zIndex: isFront ? 2 : 1 }}
               />
             );
@@ -193,12 +191,9 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
         </div>
       </div>
 
-      {/* Description (two-layer crossfade, same as the card image above) +
-          feature pills (a single set of 4, position-keyed — see the FLIP
-          effect above for why their width morphs between labels instead of
-          being duplicated per layer). */}
-      <div className="relative mt-8 px-8">
-        <div className="flex flex-col items-center gap-4 text-center">
+      {/* Description + feature pills */}
+      <div className="relative mt-4 sm:mt-8 px-4 sm:px-8">
+        <div className="flex flex-col items-center gap-3 sm:gap-4 text-center">
           {(["A", "B"] as const).map((key) => {
             const layerT = services.tabs.find((t) => t.id === layerTab[key])!;
             const isFront = front === key;
@@ -207,26 +202,21 @@ export default function ServicesSection({ dict }: { dict: Dictionary }) {
                 key={key}
                 aria-hidden={!isFront}
                 className={`font-body text-dark-gray svc-crossfade${isFront ? " svc-crossfade--front" : " absolute inset-x-0 top-0 mx-auto"}`}
-                style={{ fontSize: "14px", lineHeight: "20px", maxWidth: "400px" }}
+                style={{ fontSize: "13px", lineHeight: "19px", maxWidth: "440px" }}
               >
                 {layerT.description}
               </p>
             );
           })}
 
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-full">
             {tab.features.map((f, i) => (
-              // key is the pill's fixed position, not its (tab-specific)
-              // text — every tab has exactly 4 features, so the same 4 DOM
-              // nodes persist across a switch (only their label changes),
-              // which is what lets the FLIP effect above measure a stable
-              // "before" width to morph from.
               <span
                 key={i}
                 ref={(el) => {
                   pillRefs.current[i] = el;
                 }}
-                className="svc-feature-pill svc-pill-morph font-body"
+                className="svc-feature-pill svc-pill-morph font-body text-[12px] sm:text-[13px] px-3.5 py-2 sm:px-5 sm:py-2.5"
               >
                 {f}
               </span>
