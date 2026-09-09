@@ -167,27 +167,26 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
               )}
 
               {/* Content — header row (icon + highlight) / body row (name+description | checklist) / footer row (delivery | CTA) */}
-              <div className="relative flex flex-col p-5 sm:p-8 md:p-10" style={{ zIndex: 2 }}>
+              <div className="relative flex flex-col p-4 sm:p-8 md:p-10" style={{ zIndex: 2 }}>
                 {/* Row 1 — icon (left) / highlight (right) */}
-                <div className="flex items-start justify-between gap-6">
+                <div className="flex items-start justify-between gap-4 sm:gap-6">
                   <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:rotate-6"
+                    className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:rotate-6"
                     style={{ background: plan.highlighted ? "rgba(255,255,255,0.1)" : "rgba(19,19,19,0.08)" }}
                   >
-                    <Icon size={20} strokeWidth={2} color={plan.highlighted ? "white" : "rgb(19,19,19)"} aria-hidden />
+                    <Icon size={18} strokeWidth={2} color={plan.highlighted ? "white" : "rgb(19,19,19)"} aria-hidden />
                   </div>
 
-                  <div className="flex flex-col items-end gap-1 text-right" style={{ maxWidth: "320px" }}>
+                  <div className="flex flex-col items-end gap-0.5 sm:gap-1 text-right max-w-[280px] sm:max-w-[320px]">
                     <span
-                      className="font-body text-[13px]"
+                      className="font-body text-[11px] sm:text-[13px]"
                       style={{ color: plan.highlighted ? "rgba(255,255,255,0.5)" : "rgb(92,92,92)" }}
                     >
                       {plan.highlightLabel}
                     </span>
                     <span
-                      className="font-display leading-snug"
+                      className="font-display leading-snug text-[14px] sm:text-[18px] md:text-[24px]"
                       style={{
-                        fontSize: "clamp(18px, 2vw, 24px)",
                         color: plan.highlighted ? "rgb(255,77,0)" : "rgb(19,19,19)",
                       }}
                     >
@@ -196,31 +195,31 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
                   </div>
                 </div>
 
-                <div style={{ borderTop: `1px solid ${plan.highlighted ? "rgba(255,255,255,0.14)" : "rgba(19,19,19,0.12)"}`, margin: "28px 0" }} />
+                <div className="my-3.5 sm:my-7" style={{ borderTop: `1px solid ${plan.highlighted ? "rgba(255,255,255,0.14)" : "rgba(19,19,19,0.12)"}` }} />
 
                 {/* Row 2 — name + description (left) / feature checklist (right) */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="flex flex-col gap-3">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-8">
+                  <div className="flex flex-col gap-2 sm:gap-3">
                     <span
-                      className="font-body font-medium text-[20px]"
+                      className="font-body font-medium text-[17px] sm:text-[20px]"
                       style={{ color: plan.highlighted ? "white" : "rgb(19,19,19)" }}
                     >
                       {plan.name}
                     </span>
                     <span
-                      className="font-body text-[14px] leading-[22px]"
+                      className="font-body text-[13px] sm:text-[14px] leading-relaxed sm:leading-[22px]"
                       style={{ color: plan.highlighted ? "rgba(255,255,255,0.5)" : "rgb(92,92,92)" }}
                     >
                       {plan.description}
                     </span>
                   </div>
 
-                  <div className="flex flex-col gap-3">
+                  <div className="flex flex-col gap-2 sm:gap-3">
                     {plan.features.map((f) => (
-                      <div key={f} className="flex items-center gap-3">
-                        <span className="text-green text-[16px] leading-none">✓</span>
+                      <div key={f} className="flex items-center gap-2.5 sm:gap-3">
+                        <span className="text-green text-[14px] sm:text-[16px] leading-none">✓</span>
                         <span
-                          className="font-body text-[14px]"
+                          className="font-body text-[13px] sm:text-[14px]"
                           style={{ color: plan.highlighted ? "rgba(255,255,255,0.7)" : "rgb(92,92,92)" }}
                         >
                           {f}
@@ -230,12 +229,12 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
                   </div>
                 </div>
 
-                <div style={{ borderTop: `1px solid ${plan.highlighted ? "rgba(255,255,255,0.14)" : "rgba(19,19,19,0.12)"}`, margin: "28px 0 0" }} />
+                <div className="mt-3.5 sm:mt-7" style={{ borderTop: `1px solid ${plan.highlighted ? "rgba(255,255,255,0.14)" : "rgba(19,19,19,0.12)"}` }} />
 
                 {/* Row 3 — delivery (left) / CTA (right) */}
-                <div className="flex items-center justify-between gap-6 pt-6">
+                <div className="flex items-center justify-between gap-4 pt-3.5 sm:pt-6">
                   <span
-                    className="font-body text-[13px]"
+                    className="font-body text-[12px] sm:text-[13px]"
                     style={{ color: plan.highlighted ? "rgba(255,255,255,0.5)" : "rgb(92,92,92)" }}
                   >
                     {plan.delivery}
@@ -243,11 +242,10 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
 
                   <Link
                     href="#contact"
-                    className="btn-tactile inline-flex items-center justify-center gap-2 rounded-full font-body font-medium text-[15px] transition-colors"
+                    className="btn-tactile inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-full font-body font-medium text-[13px] sm:text-[15px] transition-colors px-4 py-2.5 sm:px-5 sm:py-3"
                     style={{
                       background: "rgba(12,12,12,0.82)",
                       color: "white",
-                      padding: "12px 20px",
                       borderRadius: "50px",
                     }}
                   >
