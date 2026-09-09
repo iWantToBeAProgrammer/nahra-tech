@@ -89,15 +89,15 @@ export default function Footer({ dict }: { dict: Dictionary }) {
         aria-hidden
       />
 
-      <div className="relative" style={{ zIndex: 1, padding: "56px 56px 0 56px" }}>
+      <div className="relative px-5 pt-8 sm:px-10 sm:pt-12 md:px-14 md:pt-14" style={{ zIndex: 1 }}>
         {/* Top: Nav columns */}
-        <div className="flex flex-col md:flex-row justify-between gap-12 pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
+        <div className="flex flex-col md:flex-row justify-between gap-6 sm:gap-8 md:gap-12 pb-6 sm:pb-10" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           {cols.map((col) => (
-            <div key={col.label} className="flex flex-col gap-4">
-              <span className="font-body text-white/40" style={{ fontSize: "13px" }}>{col.label}</span>
+            <div key={col.label} className="flex flex-col gap-2.5 sm:gap-4">
+              <span className="font-body text-white/40 text-[12px] sm:text-[13px]">{col.label}</span>
               {col.links.map((l) => (
                 <Link key={l.label} href={l.href}
-                  className="font-display text-white hover:text-orange transition-colors" style={{ fontSize: "22px" }}
+                  className="font-display text-white hover:text-orange transition-colors text-[18px] sm:text-[22px]"
                 >
                   {l.label}
                 </Link>
@@ -106,15 +106,17 @@ export default function Footer({ dict }: { dict: Dictionary }) {
           ))}
         </div>
 
-        {/* Bottom row — copyright / live clock / back-to-top, truly centered via 3-col grid */}
-        <div className="grid grid-cols-3 items-center py-6">
-          <span className="justify-self-start font-body text-white/30" style={{ fontSize: "13px" }}>{site.copyright}</span>
-          <span className="justify-self-center font-body text-white/40" style={{ fontSize: "13px" }}>
+        {/* Bottom row — copyright / live clock / back-to-top */}
+        <div className="flex flex-col-reverse sm:grid sm:grid-cols-3 items-center justify-between gap-3 py-4 sm:py-6 text-center sm:text-left">
+          <span className="font-body text-white/30 text-[12px] sm:text-[13px] sm:justify-self-start">
+            {site.copyright}
+          </span>
+          <span className="font-body text-white/40 text-[12px] sm:text-[13px] sm:justify-self-center">
             {site.location} → {time ?? "--:--:--"}
           </span>
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="justify-self-end font-body text-orange transition-opacity hover:opacity-70" style={{ fontSize: "13px" }}
+            className="font-body text-orange transition-opacity hover:opacity-70 text-[13px] sm:justify-self-end"
           >
             {site.footer.backToTop}
           </button>
@@ -122,17 +124,17 @@ export default function Footer({ dict }: { dict: Dictionary }) {
       </div>
 
       {/* Giant brand wordmark, bleeding off the bottom edge */}
-      <div className="relative overflow-hidden" style={{ zIndex: 1, marginTop: "8px" }}>
+      <div className="relative overflow-hidden" style={{ zIndex: 1, marginTop: "4px" }}>
         <span
-          className="font-display block text-right"
+          className="font-display block text-right select-none"
           style={{
-            fontSize: "clamp(160px, 24vw, 480px)",
+            fontSize: "clamp(80px, 22vw, 480px)",
             lineHeight: 1,
             backgroundImage: "linear-gradient(180deg, rgb(255,255,255) 0%, rgb(255,255,255) 45%, rgb(255,180,130) 78%, rgb(255,110,50) 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            marginBottom: "clamp(-50px, -7vw, -20px)",
+            marginBottom: "clamp(-20px, -4vw, -20px)",
           }}
         >
           {site.name}

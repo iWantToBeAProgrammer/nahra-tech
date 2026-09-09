@@ -41,8 +41,8 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
       if (!cardRef.current) return;
       const rect = cardRef.current.getBoundingClientRect();
       const viewportH = window.innerHeight;
-      const start = viewportH;
-      const end = viewportH * 0.55;
+      const start = viewportH * 1.05;
+      const end = viewportH * 0.82;
       const raw = (start - rect.top) / (start - end);
       setProgress(Math.min(1, Math.max(0, raw)));
     };
@@ -108,10 +108,10 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
           transition. */}
       <div
         ref={cardRef}
-        className="relative mx-3 px-6 py-12 md:px-14 md:py-16"
+        className="relative mx-3 px-5 py-8 sm:px-8 sm:py-12 md:px-14 md:py-16"
         style={{
           zIndex: 1,
-          borderRadius: "28px",
+          borderRadius: "24px",
           background: "rgb(17,17,17)",
           overflow: "hidden",
           opacity: progress,
@@ -124,10 +124,10 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
         <Image src={images.contactBg} alt="" fill sizes="100vw" className="object-cover opacity-30" />
         <div className="absolute inset-0" style={{ background: "rgba(10,10,10,0.7)" }} aria-hidden />
 
-        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-16" style={{ zIndex: 1 }}>
+        <div className="relative grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16" style={{ zIndex: 1 }}>
           {/* Left — heading + direct CTAs */}
           <div
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-4 sm:gap-6"
             style={{
               opacity: leftProgress,
               transform: `translateY(${(16 * (1 - leftProgress)).toFixed(1)}px) scale(${(1 - 0.04 * (1 - leftProgress)).toFixed(3)})`,
@@ -137,11 +137,11 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
             }}
           >
             <div>
-              <p className="font-body text-white/40 mb-3" style={{ fontSize: "13px" }}>{contact.label}</p>
-              <h2 className="font-display text-white leading-none mb-2" style={{ fontSize: "clamp(32px, 5vw, 64px)" }}>
+              <p className="font-body text-white/40 mb-2 sm:mb-3" style={{ fontSize: "13px" }}>{contact.label}</p>
+              <h2 className="font-display text-white mb-2" style={{ fontSize: "clamp(28px, 4.5vw, 64px)", lineHeight: "1.15" }}>
                 {contact.heading}
               </h2>
-              <p className="font-body text-white/50" style={{ fontSize: "15px" }}>{contact.subheading}</p>
+              <p className="font-body text-white/50" style={{ fontSize: "clamp(14px, 2vw, 15px)" }}>{contact.subheading}</p>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-3">
@@ -157,8 +157,8 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                     color: i === 0 ? "rgb(19,19,19)" : "white",
                     border: i === 0 ? "none" : "1px solid rgba(255,255,255,0.16)",
                     borderRadius: "50px",
-                    padding: "14px 24px",
-                    fontSize: "15px",
+                    padding: "12px 20px",
+                    fontSize: "14px",
                   }}
                 >
                   {cta.label} →
@@ -169,7 +169,7 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
 
           {/* Right — project inquiry form */}
           <form
-            className="flex flex-col gap-6"
+            className="flex flex-col gap-4 sm:gap-6"
             onSubmit={handleSubmit}
             style={{
               opacity: rightProgress,
@@ -179,8 +179,8 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
               willChange: "opacity, transform, filter",
             }}
           >
-            <div className="flex flex-col gap-2">
-              <label className="font-body text-white/70" style={{ fontSize: "14px" }}>
+            <div className="flex flex-col gap-1.5 sm:gap-2">
+              <label className="font-body text-white/70 text-[13px] sm:text-[14px]">
                 {contact.form.nameLabel}
               </label>
               <input
@@ -190,12 +190,12 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                 onChange={(e) => setName(e.target.value)}
                 placeholder={contact.form.namePlaceholder}
                 className={fieldClass}
-                style={{ fontSize: "16px" }}
+                style={{ fontSize: "15px" }}
               />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="font-body text-white/70" style={{ fontSize: "14px" }}>
+            <div className="flex flex-col gap-1.5 sm:gap-2">
+              <label className="font-body text-white/70 text-[13px] sm:text-[14px]">
                 {contact.form.emailLabel}
               </label>
               <input
@@ -205,12 +205,12 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder={contact.form.emailPlaceholder}
                 className={fieldClass}
-                style={{ fontSize: "16px" }}
+                style={{ fontSize: "15px" }}
               />
             </div>
 
-            <div className="flex flex-col gap-2">
-              <label className="font-body text-white/70" style={{ fontSize: "14px" }}>
+            <div className="flex flex-col gap-1.5 sm:gap-2">
+              <label className="font-body text-white/70 text-[13px] sm:text-[14px]">
                 {contact.form.messageLabel}
               </label>
               <textarea
@@ -220,7 +220,7 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={contact.form.messagePlaceholder}
                 className={`${fieldClass} resize-none`}
-                style={{ fontSize: "16px" }}
+                style={{ fontSize: "15px" }}
               />
             </div>
 
@@ -231,8 +231,8 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
                 background: "rgb(220,220,220)",
                 color: "rgb(19,19,19)",
                 borderRadius: "50px",
-                padding: "14px 24px",
-                fontSize: "15px",
+                padding: "12px 20px",
+                fontSize: "14px",
               }}
             >
               {contact.form.submitLabel} →
@@ -242,10 +242,9 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
 
         {/* Bold running email marquee — centered, fading to black on both edges, seamless infinite loop */}
         <div
-          className="relative mt-10 mx-auto overflow-hidden"
+          className="relative mt-6 sm:mt-10 mx-auto overflow-hidden w-full sm:w-[85%]"
           style={{
             zIndex: 1,
-            width: "85%",
             maskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
             WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)",
           }}
@@ -254,8 +253,8 @@ export default function ContactSection({ dict }: { dict: Dictionary }) {
             {emailLoopItems.map((_, i) => (
               <span
                 key={i}
-                className="font-display text-white inline-flex items-center gap-6"
-                style={{ fontSize: "clamp(20px, 3vw, 32px)", padding: "22px 28px" }}
+                className="font-display text-white inline-flex items-center gap-4 sm:gap-6"
+                style={{ fontSize: "clamp(18px, 3vw, 32px)", padding: "16px 20px" }}
               >
                 {contact.email} <span className="opacity-60">×</span>
               </span>

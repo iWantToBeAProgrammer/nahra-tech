@@ -74,13 +74,13 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
   }, [total]);
 
   return (
-    <section id="partners" className="bg-bg-light px-6 py-16 md:px-14 md:py-20 lg:px-28 lg:py-28">
+    <section id="partners" className="bg-bg-light px-4 py-10 sm:px-6 sm:py-16 md:px-14 md:py-20 lg:px-28 lg:py-28">
       {/* Header — centered */}
-      <div className="flex flex-col items-center gap-3 mb-14 text-center">
+      <div className="flex flex-col items-center gap-3 mb-10 sm:mb-14 text-center">
         <SectionLabel>{engagement.label}</SectionLabel>
         <h2
-          className="font-display text-ink-black leading-none"
-          style={{ fontSize: "clamp(40px, 5vw, 64px)" }}
+          className="font-display text-ink-black"
+          style={{ fontSize: "clamp(28px, 4.5vw, 64px)", lineHeight: "1.15" }}
         >
           {engagement.heading}
         </h2>
@@ -167,7 +167,7 @@ export default function EngagementSection({ dict }: { dict: Dictionary }) {
               )}
 
               {/* Content — header row (icon + highlight) / body row (name+description | checklist) / footer row (delivery | CTA) */}
-              <div className="relative flex flex-col p-8 md:p-10" style={{ zIndex: 2 }}>
+              <div className="relative flex flex-col p-5 sm:p-8 md:p-10" style={{ zIndex: 2 }}>
                 {/* Row 1 — icon (left) / highlight (right) */}
                 <div className="flex items-start justify-between gap-6">
                   <div
