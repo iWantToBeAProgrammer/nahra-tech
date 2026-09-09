@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import type { Dictionary, Locale } from "@/data/dictionaries";
+import { images } from "@/data/images";
 
 export default function Nav({ dict, lang }: { dict: Dictionary; lang: Locale }) {
   const [open, setOpen] = useState(false);
@@ -47,20 +49,20 @@ export default function Nav({ dict, lang }: { dict: Dictionary; lang: Locale }) 
         >
           <span
             aria-hidden
-            className="w-[18px] h-[18px] shrink-0"
-            style={{ background: "radial-gradient(circle at bottom left, rgb(240,240,240) 19px, rgba(12,12,12,0.82) 19px)" }}
+            className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0"
+            style={{ background: "radial-gradient(circle at bottom left, rgb(240,240,240) 15px, rgba(12,12,12,0.82) 15px)" }}
           />
           <span
-            className="inline-flex items-center gap-2 text-white text-[13px] font-body shrink-0"
-            style={{ background: "rgba(12,12,12,0.82)", padding: "10px 24px", borderRadius: "0 0 32px 32px" }}
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-white text-[11px] sm:text-[13px] font-body shrink-0 px-3.5 py-1.5 sm:px-6 sm:py-2.5 rounded-b-[18px] sm:rounded-b-[32px] max-w-[90vw] truncate"
+            style={{ background: "rgba(12,12,12,0.82)" }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green shrink-0" />
             {dict.site.nav.badge}
           </span>
           <span
             aria-hidden
-            className="w-[18px] h-[18px] shrink-0"
-            style={{ background: "radial-gradient(circle at bottom right, rgb(240,240,240) 19px, rgba(12,12,12,0.82) 19px)" }}
+            className="w-[14px] h-[14px] sm:w-[18px] sm:h-[18px] shrink-0"
+            style={{ background: "radial-gradient(circle at bottom right, rgb(240,240,240) 15px, rgba(12,12,12,0.82) 15px)" }}
           />
         </div>
       </div>
@@ -76,17 +78,26 @@ export default function Nav({ dict, lang }: { dict: Dictionary; lang: Locale }) 
         }}
       >
         <div className="mx-auto w-full" style={{ maxWidth: "1200px" }}>
-          {/* Main nav — 4-column grid: logo | links | lang | contact */}
+          {/* Main nav — flex on mobile, 4-column grid on desktop */}
           <div
-            className="grid items-center"
-            style={{ gridTemplateColumns: "1fr auto auto 1fr", padding: "28px 32px", gap: "32px" }}
+            className="flex md:grid items-center justify-between px-4 py-3 sm:px-6 sm:py-5 md:px-8 md:py-7 md:gap-8"
+            style={{ gridTemplateColumns: "1fr auto auto 1fr" }}
           >
             {/* Logo left */}
             <Link
               href="/"
-              className="font-display text-orange text-[28px] leading-none justify-self-start"
+              className="flex items-center gap-2.5 justify-self-start"
             >
-              {dict.site.name}.
+              <Image
+                src={images.brandMarkNavy}
+                alt=""
+                width={28}
+                height={28}
+                className="shrink-0"
+              />
+              <span className="font-display text-orange text-[28px] leading-none">
+                {dict.site.name}.
+              </span>
             </Link>
 
             {/* Links center */}

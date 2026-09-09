@@ -63,11 +63,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
   return (
     <section className="bg-bg-light">
       {/* Light portion — center-aligned */}
-      <div className="bg-smoky-white pb-12 pt-8" style={{ borderRadius: "0 0 40px 40px" }}>
-        <div className="flex flex-col items-center gap-8 px-6">
+      <div className="bg-smoky-white pb-8 sm:pb-12 pt-6 sm:pt-8 rounded-b-[28px] sm:rounded-b-[40px]">
+        <div className="flex flex-col items-center gap-6 sm:gap-8 px-4 sm:px-6">
           {/* Trust badge */}
-          <div className="flex items-center gap-2">
-            <div className="flex -space-x-2">
+          <div className="flex items-center justify-center gap-2 max-w-full">
+            <div className="flex -space-x-2 shrink-0">
               {heroAvatars.map((src, i) => (
                 <Image
                   key={i}
@@ -76,7 +76,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                   width={32}
                   height={32}
                   loading={i === 0 ? "eager" : "lazy"}
-                  className="w-8 h-8 rounded-full object-cover border-2 border-smoky-white"
+                  className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover border-2 border-smoky-white shrink-0"
                   style={{
                     transform: isLoaded ? "scale(1) rotate(0deg)" : "scale(0.9) rotate(-6deg)",
                     opacity: isLoaded ? 1 : 0,
@@ -88,7 +88,7 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
               ))}
             </div>
             <span
-              className="text-dark-gray text-[14px] font-body"
+              className="text-dark-gray text-[13px] sm:text-[14px] font-body truncate sm:whitespace-normal"
               style={{
                 opacity: isLoaded ? 1 : 0,
                 transform: isLoaded ? "translateX(0)" : "translateX(-4px)",
@@ -102,10 +102,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
 
           {/* Headline — Typewriter Blur-Crossfade */}
           <h1
-            className="font-display text-ink-black leading-none text-center relative"
-            style={{ fontSize: "clamp(36px, 5.5vw, 72px)", lineHeight: "1.1" }}
+            className="font-display text-ink-black leading-[1.18] sm:leading-[1.1] text-center relative max-w-[920px]"
+            style={{ fontSize: "clamp(24px, 5.2vw, 72px)" }}
           >
-            <span className="block text-balance">
+            <span className="inline-block sm:block text-balance">
               <TypewriterChars text={l1p1} startIndex={l1p1_start} visibleCount={visibleCount} />{" "}
               <Image
                 src={heroInlines[0]}
@@ -113,10 +113,10 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 width={82}
                 height={64}
                 loading="eager"
-                className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
+                className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-1 sm:mx-2"
                 style={{
-                  width: "1.35em",
-                  height: "0.9em",
+                  width: "1.25em",
+                  height: "0.85em",
                   filter: visibleCount >= img1_index ? "blur(0px)" : "blur(6px)",
                   opacity: visibleCount >= img1_index ? 1 : 0,
                   transform: visibleCount >= img1_index ? "scale(1) rotate(-2deg)" : "scale(0) rotate(-15deg)",
@@ -125,19 +125,19 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 aria-hidden
               />{" "}
               <TypewriterChars text={l1p2} startIndex={l1p2_start} visibleCount={visibleCount} className="text-orange" />
-            </span>
+            </span>{" "}
 
-            <span className="block text-balance">
+            <span className="inline-block sm:block text-balance">
               <TypewriterChars text={l2p1} startIndex={l2p1_start} visibleCount={visibleCount} className="text-dark-gray" />{" "}
               <Image
                 src={heroInlines[1]}
                 alt=""
                 width={100}
                 height={67}
-                className="rounded-full object-cover shadow-sm inline-block align-middle rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
+                className="rounded-full object-cover shadow-sm inline-block align-middle rotate-2 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-1 sm:mx-2"
                 style={{
-                  width: "1.35em",
-                  height: "0.9em",
+                  width: "1.25em",
+                  height: "0.85em",
                   filter: visibleCount >= img2_index ? "blur(0px)" : "blur(6px)",
                   opacity: visibleCount >= img2_index ? 1 : 0,
                   transform: visibleCount >= img2_index ? "scale(1) rotate(2deg)" : "scale(0) rotate(-15deg)",
@@ -146,20 +146,20 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
                 aria-hidden
               />{" "}
               <TypewriterChars text={l2p2} startIndex={l2p2_start} visibleCount={visibleCount} />
-            </span>
+            </span>{" "}
 
-            <span className="block text-balance">
+            <span className="inline-block sm:block text-balance">
               <TypewriterChars text={l3p1} startIndex={l3p1_start} visibleCount={visibleCount} className="text-dark-gray" />{" "}
-              <TypewriterChars text={l3p2} startIndex={l3p2_start} visibleCount={visibleCount} />{" "}
+              {l3p2 ? <TypewriterChars text={l3p2} startIndex={l3p2_start} visibleCount={visibleCount} /> : null}{" "}
               <Image
                 src={heroInlines[2]}
                 alt=""
                 width={100}
                 height={67}
-                className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-1 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-2"
+                className="rounded-full object-cover shadow-sm inline-block align-middle -rotate-1 hover:rotate-0 hover:scale-110 active:scale-95 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] mx-1 sm:mx-2"
                 style={{
-                  width: "1.35em",
-                  height: "0.9em",
+                  width: "1.25em",
+                  height: "0.85em",
                   filter: visibleCount >= img3_index ? "blur(0px)" : "blur(6px)",
                   opacity: visibleCount >= img3_index ? 1 : 0,
                   transform: visibleCount >= img3_index ? "scale(1) rotate(-1deg)" : "scale(0) rotate(-15deg)",
@@ -173,11 +173,8 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
 
           {/* Subtitle */}
           <p
-            className="text-dark-gray font-body text-center max-w-[540px]"
+            className="text-dark-gray font-body text-center max-w-[540px] text-[14px] sm:text-[16px] leading-[22px] sm:leading-[24px]"
             style={{
-              fontSize: "16px",
-              lineHeight: "24px",
-              letterSpacing: "-0.16px",
               filter: isLoaded ? "blur(0px)" : "blur(4px)",
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? "translateY(0)" : "translateY(10px)",
@@ -192,11 +189,9 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
           {/* CTA */}
           <Link
             href={hero.cta.href}
-            className="btn-tactile inline-flex items-center gap-2 text-white text-[15px] font-body font-medium"
+            className="btn-tactile inline-flex items-center justify-center gap-2 text-white text-[14px] sm:text-[15px] font-body font-medium px-5 py-3 sm:px-6 sm:py-3.5 rounded-full"
             style={{
               background: "rgba(12,12,12,0.82)",
-              padding: "12px 24px",
-              borderRadius: "50px",
               filter: isLoaded ? "blur(0px)" : "blur(4px)",
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? "translateY(0)" : "translateY(10px)",
@@ -210,13 +205,11 @@ export default function HeroSection({ dict }: { dict: Dictionary }) {
         </div>
 
         {/* Dark showcase panel — real image */}
-        <div className="px-4 mt-10 perspective-1200">
+        <div className="px-3 sm:px-4 mt-8 sm:mt-10 perspective-1200">
           <div
-            className="w-full overflow-hidden"
+            className="w-full overflow-hidden rounded-[20px] sm:rounded-[28px]"
             style={{
-              borderRadius: "28px",
               background: "rgb(17,17,17)",
-              minHeight: "420px",
               transform: isLoaded
                 ? "perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0px) scale(1)"
                 : "perspective(1200px) rotateX(8deg) rotateY(0deg) translateY(16px) scale(0.98)",

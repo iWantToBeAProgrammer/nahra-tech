@@ -16,25 +16,56 @@ export default function TypewriterChars({
   className?: string;
   style?: React.CSSProperties;
 }) {
+  const words = text.split(" ");
+  let globalCharOffset = startIndex;
+
   return (
     <span className={className} style={style}>
-      {text.split("").map((char, i) => {
-        const charIndex = startIndex + i;
-        const isRevealed = charIndex < visibleCount;
+      {words.map((word, wIdx) => {
+        const wordStartIndex = globalCharOffset;
+        globalCharOffset += word.length + (wIdx < words.length - 1 ? 1 : 0);
+
         return (
-          <span
-            key={`char-${startIndex + i}`}
-            style={{
-              display: "inline-block",
-              whiteSpace: char === " " ? "pre" : "normal",
-              filter: isRevealed ? "blur(0px)" : "blur(4px)",
-              opacity: isRevealed ? 1 : 0,
-              transform: isRevealed ? "translateY(0)" : "translateY(3px)",
-              transition: "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
-              willChange: "filter, opacity, transform",
-            }}
-          >
-            {char}
+          <span key={`word-${wIdx}`} className="inline-block whitespace-nowrap">
+            {word.split("").map((char, cIdx) => {
+              const charIndex = wordStartIndex + cIdx;
+              const isRevealed = charIndex < visibleCount;
+              return (
+                <span
+                  key={`char-${charIndex}`}
+                  style={{
+                    display: "inline-block",
+                    whiteSpace: "pre",
+                    filter: isRevealed ? "blur(0px)" : "blur(4px)",
+                    opacity: isRevealed ? 1 : 0,
+                    transform: isRevealed ? "translateY(0)" : "translateY(3px)",
+                    transition:
+                      "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
+                    willChange: "filter, opacity, transform",
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            })}
+            {wIdx < words.length - 1 && (
+              <span
+                key={`space-${wordStartIndex + word.length}`}
+                style={{
+                  display: "inline-block",
+                  whiteSpace: "pre",
+                  filter: wordStartIndex + word.length < visibleCount ? "blur(0px)" : "blur(4px)",
+                  opacity: wordStartIndex + word.length < visibleCount ? 1 : 0,
+                  transform:
+                    wordStartIndex + word.length < visibleCount ? "translateY(0)" : "translateY(3px)",
+                  transition:
+                    "filter 120ms ease-out, opacity 120ms ease-out, transform 120ms ease-out",
+                  willChange: "filter, opacity, transform",
+                }}
+              >
+                {" "}
+              </span>
+            )}
           </span>
         );
       })}
