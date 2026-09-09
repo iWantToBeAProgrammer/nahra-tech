@@ -27,7 +27,7 @@ const gridStyle = {
     "featured secC smallE"
     "featured secC smallE"
   `,
-  gap: "10px",
+  gap: "clamp(6px, 1.5vw, 10px)",
 } as const;
 
 function Photo({ member, isFeatured }: { member: (typeof MEMBERS)[number]; isFeatured: boolean }) {
@@ -59,11 +59,11 @@ function Photo({ member, isFeatured }: { member: (typeof MEMBERS)[number]; isFea
       </motion.div>
 
       {isFeatured && (
-        <div style={{ position: "absolute", top: 16, left: 16, zIndex: 2 }}>
+        <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-10">
           <Typewriter
             key={member.name}
             text={member.name}
-            className="font-body text-white text-[13px]"
+            className="font-body text-white text-[12px] sm:text-[13px]"
             style={{ textShadow: "0 1px 8px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.6)" }}
           />
         </div>
